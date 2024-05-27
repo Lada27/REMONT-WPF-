@@ -40,6 +40,46 @@ namespace CURSACH.View {
     /// </summary>
     public partial class AddRequestCart : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
+        
+        #line 97 "..\..\..\View\AddRequestCart.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnCloseDetail;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 128 "..\..\..\View\AddRequestCart.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox Description;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 169 "..\..\..\View\AddRequestCart.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox tbModel;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 206 "..\..\..\View\AddRequestCart.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox tbType;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 221 "..\..\..\View\AddRequestCart.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnSave;
+        
+        #line default
+        #line hidden
+        
         private bool _contentLoaded;
         
         /// <summary>
@@ -68,6 +108,36 @@ namespace CURSACH.View {
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
         void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.btnCloseDetail = ((System.Windows.Controls.Button)(target));
+            
+            #line 105 "..\..\..\View\AddRequestCart.xaml"
+            this.btnCloseDetail.Click += new System.Windows.RoutedEventHandler(this.btnCloseDetails_Click);
+            
+            #line default
+            #line hidden
+            return;
+            case 2:
+            this.Description = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 3:
+            this.tbModel = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 4:
+            this.tbType = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 5:
+            this.btnSave = ((System.Windows.Controls.Button)(target));
+            
+            #line 228 "..\..\..\View\AddRequestCart.xaml"
+            this.btnSave.Click += new System.Windows.RoutedEventHandler(this.btnSave_Click);
+            
+            #line default
+            #line hidden
+            return;
+            }
             this._contentLoaded = true;
         }
     }
