@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace CURSACH.View
 {
     /// <summary>
-    /// Логика взаимодействия для Home.xaml
+    /// Логика взаимодействия для ClientHome.xaml
     /// </summary>
-    public partial class Home : Window
+    public partial class ClientHome : Window
     {
 
         public static String statusDisplay = "В работе";
         public static int deadlineDisplaay = 300;
-        public Home(int Id)
+        public ClientHome(int Id)
         {
             InitializeComponent();
             WindowState = CurrentWindow.State;
@@ -92,7 +92,7 @@ namespace CURSACH.View
 
         private void btnLHome_Click(object sender, RoutedEventArgs e)
         {
-            Home home = new Home(CurrentUser.UserId);
+            ClientHome home = new ClientHome(CurrentUser.UserId);
             home.Show();
             this.Hide();
         }

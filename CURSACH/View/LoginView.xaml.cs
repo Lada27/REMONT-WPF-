@@ -66,7 +66,7 @@ namespace CURSACH.View
             if (UserId >= 0) 
             {
 
-                Home home = new Home(CurrentUser.UserId);
+                ClientHome home = new ClientHome(CurrentUser.UserId);
                 home.Show();
                 this.Hide();
             }

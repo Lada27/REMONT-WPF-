@@ -204,7 +204,7 @@ namespace CURSACH.View
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            Home home = new Home(CurrentUser.UserId);
+            ClientHome home = new ClientHome(CurrentUser.UserId);
             home.Show();
             this.Hide();
         }

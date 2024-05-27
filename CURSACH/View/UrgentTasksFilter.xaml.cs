@@ -29,7 +29,7 @@ namespace CURSACH
         private void btnApplyDeadlineFilerData(object sender, RoutedEventArgs e)
         {
             // Сохраняем значение из TextBox в свойство DaysUntilDeadline
-            Home.deadlineDisplaay = int.Parse(daysUntilDeadline.Text);
+            ClientHome.deadlineDisplaay = int.Parse(daysUntilDeadline.Text);
 
             // Устанавливаем результат диалога как "true" и закрываем окно
             DialogResult = true;

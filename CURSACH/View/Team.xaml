@@ -165,7 +165,7 @@
                             <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\homeLogoWhite.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <Button x:Name="btnHome"                          
                                     BorderThickness="0"
-                                    Content="Домой"
+                                    Content="Заявки"
                                     Foreground="White"
                                     FontSize="14"
                                     FontFamily="Montserrat"
@@ -237,35 +237,6 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\projectLogoWhite.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button x:Name="btnProjects"                          
-                                     BorderThickness="0"
-                                     Content="Проекты"
-                                     Foreground="White"
-                                     FontSize="14"
-                                     FontFamily="Montserrat"
-                                     Cursor="Hand"
-                                     Margin="0,0,0,0"
-                                     Grid.Column="1" Click="btnProjects_Click">
-
-                                <Button.Style>
-                                    <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Background" Value="#7C65B5"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#FFC97F"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                                <Button.Template>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border CornerRadius="5" Width="55" Height="20" Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Left"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
                         </Grid>
                         <Grid Grid.Row="4">
                             <Grid.ColumnDefinitions>
@@ -335,7 +306,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Row="0"
-                                           Text="Участники"
+                                           Text="Мастера"
                                             Foreground="#160C31"
                                             Height="25"
                                             FontSize="18"
@@ -348,7 +319,7 @@
 
 
                                 <ScrollViewer Grid.Row="1" Margin="0,20,0,25" VerticalScrollBarVisibility="Auto">
-                                    <StackPanel x:Name="spAllUsers">
+                                    <StackPanel x:Name="spAllMaster">
                                     </StackPanel>
                                 </ScrollViewer>
                             </Grid>
@@ -357,9 +328,6 @@
 
                         </Border>
                        
-                            
-
-
                             <Border Grid.Column="1"
                                     CornerRadius="30"
                                     Background="#FAFAFC"
@@ -370,9 +338,7 @@
                                     <Grid.RowDefinitions>
                                     <RowDefinition Height="25"/>
                                     <RowDefinition/>
-                                    <RowDefinition Height="0.2*"/>
 
-                                    <RowDefinition Height="1.7*"/>
 
                                     </Grid.RowDefinitions>
 
@@ -388,139 +354,149 @@
                                     Grid.Row="0"/>
 
                                 <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition Width="1.7*"/>
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="1.7*"/>
 
-                                        </Grid.ColumnDefinitions>
+                                            </Grid.ColumnDefinitions>
 
-                                        <Border Name ="Icon" Background="#5B41A3"
-                                                Margin="5,15"
-                                                Width="70"
-                                                Height="70"
-                                                CornerRadius="35"
-                                                Grid.Column="0">
-                                            <TextBlock Name="FirstLetterOfTheName" Text="C"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       FontFamily="Montserrat"
-                                                       FontSize="30"
-                                                       Foreground="White"
-                                                       FontWeight="Bold"
-                                                />
+                                            <Border Name ="Icon" Background="#5B41A3"
+                                                    Margin="5,15"
+                                                    Width="70"
+                                                    Height="70"
+                                                    CornerRadius="35"
+                                                    Grid.Column="0">
+                                                <TextBlock Name="FirstLetterOfTheName" Text="C"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           FontFamily="Montserrat"
+                                                           FontSize="30"
+                                                           Foreground="White"
+                                                           FontWeight="Bold"
+                                                    />
                                             
 
-                                        </Border>
+                                            </Border>
 
-                                        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock Name="UserName" Text="Имя Фамилия"
+                                            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <TextBlock Name="UserName" Text="Имя Фамилия Фамилия"
+                                                               TextWrapping="Wrap"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                FontFamily="Montserrat"
+                                                                FontSize="18"
+                                                                Foreground="Black"
+                                                               Margin="10" TextDecorations="Underline" />
+
+                                                    <TextBlock Name="UserEmail" Text="Почта"
+                                                            TextWrapping="Wrap"
+                                                             HorizontalAlignment="Left"
+                                                             VerticalAlignment="Center"
+                                                             FontFamily="Montserrat"
+                                                             FontSize="17"
+                                                             Foreground="Black"
+                                                            Margin="10,0" TextDecorations="Underline" />
+
+                                                    <TextBlock Name="UserPhone" Text="91123456"
                                                            TextWrapping="Wrap"
                                                             HorizontalAlignment="Left"
                                                             VerticalAlignment="Center"
                                                             FontFamily="Montserrat"
-                                                            FontSize="18"
+                                                            FontSize="17"
                                                             Foreground="Black"
                                                            Margin="10" TextDecorations="Underline" />
 
-                                                <TextBlock Name="UserEmail" Text="Почта"
-                                                        TextWrapping="Wrap"
-                                                         HorizontalAlignment="Left"
-                                                         VerticalAlignment="Center"
-                                                         FontFamily="Montserrat"
-                                                         FontSize="17"
-                                                         Foreground="Black"
-                                                        Margin="10,0" TextDecorations="Underline" />
+                                                </StackPanel>
+                                            </ScrollViewer>
+                                        </Grid>
+                                        <ScrollViewer>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="0.5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0"
+                                                               Text="Текущих заявок:"
+                                                                Foreground="#160C31"
+                                                                FontSize="19"
+                                                               Margin="3,0,0,0"
+                                                                FontFamily="Montserrat"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"/>
+                                                    <TextBlock x:Name="CurrentRequests" Grid.Column="1"
+                                                               Text="8"
+                                                                Foreground="#160C31"
+                                                                FontSize="19"
+                                                               Margin="3,0,0,0"
+                                                                FontFamily="Montserrat"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="0.5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0"
+                                                               Text="Выполненных заявок:"
+                                                               Foreground="#160C31"
+                                                               FontSize="19"
+                                                               Margin="3,20,0,0"
+                                                               TextWrapping="Wrap"
+                                                               FontFamily="Montserrat"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"/>
+                                                    <TextBlock x:Name="DoneRequests" Grid.Column="1"
+                                                               Text="8"
+                                                                Foreground="#160C31"
+                                                                FontSize="19"
+                                                               Margin="3,0,0,0"
+                                                                FontFamily="Montserrat"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                                                </Grid>
+                                                <Grid Grid.Row="2">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="0.5*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0"
+                                                               Text="Среднее время выполнения (в днях):"
+                                                               Foreground="#160C31"
+                                                               FontSize="19"
+                                                               Margin="3,20,0,0"
+                                                               TextWrapping="Wrap"
+                                                               FontFamily="Montserrat"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"/>
+                                                    <TextBlock x:Name="MidTme" Grid.Column="1"
+                                                                Text="8"
+                                                                Foreground="#160C31"
+                                                                FontSize="19"
+                                                                Margin="3,0,0,0"
+                                                                FontFamily="Montserrat"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                                                </Grid>
 
-                                                <TextBlock Name="UserPhone" Text="91123456"
-                                                       TextWrapping="Wrap"
-                                                        HorizontalAlignment="Left"
-                                                        VerticalAlignment="Center"
-                                                        FontFamily="Montserrat"
-                                                        FontSize="17"
-                                                        Foreground="Black"
-                                                       Margin="10" TextDecorations="Underline" />
 
-                                            </StackPanel>
+                                            </Grid>
                                         </ScrollViewer>
-
-                                    </Grid>
-
-                                <Grid Grid.Row="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Button x:Name="btnFilter"                          
-                                             BorderThickness="0"
-                                             Content="v Фильтр"
-                                             Foreground="White"
-                                        Background="#5B41A3"
-                                             FontSize="14"
-                                             FontFamily="Montserrat"
-                                             Margin="0,0,3,0"
-
-                                             Cursor="Hand"
-                                             Grid.Column="0" 
-                                             Click="btnFilter_Click">
-
-                                        <Button.Style>
-                                            <Style TargetType="{x:Type Button}">
-                                                <Setter Property="Background" Value="#FAFAFC"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="#FFC97F"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                        <Button.Template>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border CornerRadius="15" Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Button.Template>
-                                    </Button>
-
-                                    <Button x:Name="btnAddTaskByUser"                          
-                                             BorderThickness="0"
-                                             Content="+ Задача"
-                                             Foreground="White"
-                                        Background="#5B41A3"
-                                             FontSize="14"
-                                             FontFamily="Montserrat"
-                                             Cursor="Hand"
-                                             Grid.Column="1" 
-                                            Margin="3,0,0,0"
-                                             Click="btnAddTaskByUser_Click">
-
-                                        <Button.Style>
-                                            <Style TargetType="{x:Type Button}">
-                                                <Setter Property="Background" Value="#FAFAFC"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="#FFC97F"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                        <Button.Template>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border CornerRadius="15" Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Button.Template>
-                                    </Button>
-
+                                    </StackPanel>
+                                    
+                                   
 
                                 </Grid>
-                                <ScrollViewer Grid.Row="3" Margin="0,0,0,24" VerticalScrollBarVisibility="Auto">
-                                        <StackPanel Name="spUserTasks" >
-                                        </StackPanel>   
-                                    </ScrollViewer>
+                                
                                 </Grid>
 
                                 

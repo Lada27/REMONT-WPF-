@@ -37,7 +37,7 @@ namespace CURSACH.View
                 string selectedStatus = selectedItem.Content.ToString();
 
                 // Теперь вы можете использовать выбранный статус в вашем коде
-                Home.statusDisplay = selectedStatus;
+                ClientHome.statusDisplay = selectedStatus;
 
                 // Устанавливаем результат диалога как "true" и закрываем окно
                 DialogResult = true;
