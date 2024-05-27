@@ -1,0 +1,507 @@
+﻿<Window x:Class="CURSACH.View.Projects"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CURSACH.View"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+    
+    Title="Projects" Height="400" Width="533">
+
+    <Window.Resources>
+        <Style TargetType="ScrollViewer" x:Key="CustomScrollViewerStyle">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Window.Resources>
+
+    <Border CornerRadius="30"
+     Background="#5B41A3"
+     BorderBrush="#7C65B5"
+     BorderThickness="4">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Проекты"
+                       Foreground="DarkGray"
+                       FontSize="10"
+                       FontFamily="Montserrat"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+                <Button x:Name="btnMinimize"                           
+                    BorderThickness="0"
+                    Content="-"
+                    Foreground="White"
+                    FontSize="16"
+                    FontFamily="Montserrat"
+                    Cursor="Hand"
+                    Grid.Column="1"
+                    Click="btnMinimize_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#28AEED"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#278BEF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
+                                CornerRadius="9"
+                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="btnMaximaze"                           
+            BorderThickness="0"
+            Content="[ ]"
+            Foreground="White"
+            FontSize="10"
+            FontFamily="Montserrat"
+            Cursor="Hand"
+            Grid.Column="2"
+            Click="btnMaximaze_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#28AEED"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#278BEF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
+                CornerRadius="9"
+                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="btnClose"                          
+                    BorderThickness="0"
+                    Content="X"
+                    Foreground="White"
+                    FontSize="12"
+                    FontFamily="Montserrat"
+                    Cursor="Hand"
+                    Grid.Column="3"
+                    Click="btnClose_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#DA34AE"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#C62DAE"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
+                                CornerRadius="9"
+                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="112"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+
+                <Border CornerRadius="30"
+                        Background="#7C65B5"
+                        Margin="5"
+                        Grid.Column="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\homeLogoWhite.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button x:Name="btnHome"                          
+                                    BorderThickness="0"
+                                    Content="Домой"
+                                    Foreground="White"
+                                    FontSize="14"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    Margin="0,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="1" Click="btnHome_Click"
+                                    >
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#7C65B5"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFC97F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="5" Width="55" Height="20" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\teamLogoWhite.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button x:Name="btnTeam"                          
+                                     BorderThickness="0"
+                                     Content="Команда"
+                                     Foreground="White"
+                                     FontSize="14"
+                                     FontFamily="Montserrat"
+                                     Cursor="Hand"
+                                     Margin="0,0,0,0"
+                                     Grid.Column="1" Click="btnTeam_Click">
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#7C65B5"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFC97F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="5" Width="55" Height="20" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\projectLogoYellow.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button x:Name="btnProjects"                          
+                                     BorderThickness="0"
+                                     Content="Проекты"
+                                     Foreground="#FFC97F"
+                                     FontSize="14"
+                                     FontFamily="Montserrat"
+                                     Cursor="Hand"
+                                     Margin="0,0,0,0"
+                                     Grid.Column="1">
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#7C65B5"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#7C65B5"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="5" Width="55" Height="20" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\profileLogoWhite.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button x:Name="btnProfile"                          
+                                    BorderThickness="0"
+                                    Content="Профиль"
+                                    Foreground="White"
+                                    FontSize="14"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    Margin="0,0,0,0"
+                                    Grid.Column="1" Click="btnProfile_Click"
+                                    >
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#7C65B5"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFC97F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="5" Width="59" Height="20" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </Grid>
+
+
+                </Border>
+
+                <Border CornerRadius="30"
+                        Background="White"
+                        Margin="5"
+                        Grid.Column="1">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0"
+                                    CornerRadius="30"
+                                    Background="#FAFAFC"
+                                    BorderBrush="#7C65B5"
+                                    BorderThickness="0.5"
+                                    Margin="5">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.15*"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.5*"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Проекты"
+                                                    Foreground="#160C31"
+                                                    FontSize="16"
+                                                    FontWeight="Bold"
+                                                    FontFamily="Montserrat"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Margin="10,0,0,0"
+                                                    Grid.Column="0"/>
+
+
+                                        <Button x:Name="btnPlusPoject"                          
+                                                        BorderThickness="0"
+                                                        Content="+"
+                                                        Foreground="White"
+                                                        FontSize="20"
+                                                        Margin="0,10,5,10"
+                                                        FontFamily="Montserrat"
+                                                        Cursor="Hand" 
+                                                        Click="btnAddProject_Click"
+                                                        Grid.Column="1">
+
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Background" Value="#7C65B5"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#FFC97F"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border CornerRadius="30" Height="25" Width="25" Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                    </Grid>
+
+                                <ScrollViewer Grid.Row="1" Style="{StaticResource CustomScrollViewerStyle}" Margin="0,0,0,25" VerticalScrollBarVisibility="Auto">
+                                        <StackPanel x:Name="spAllProjects" Orientation="Vertical">
+                                        </StackPanel>
+                                    </ScrollViewer>
+
+
+                            </Grid>
+
+                        </Border>
+
+                         <Border Grid.Column="1"
+                                    CornerRadius="30"
+                                    Background="#FAFAFC"
+                                    BorderBrush="#7C65B5"
+                                    BorderThickness="0.5"
+                                    Margin="5">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.15*"/>
+                                    <RowDefinition/>
+
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="0.7*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                                        <TextBlock Name="CurrentProjectName" 
+                                                 Text="TaskManager WPF"
+                                                   TextWrapping="Wrap"
+                                                 Foreground="#160C31"
+                                                 FontSize="16"                                       
+                                                 FontWeight="Bold"
+                                                 FontFamily="Montserrat"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Margin="10,0,0,0"
+                                                 />
+                                    </ScrollViewer>
+
+                                    <Button x:Name="btnProjectPlusTask"                          
+                                              BorderThickness="0"
+                                              Content="+"
+                                              Foreground="White"
+                                              FontSize="20"
+                                             Margin="0,10,0,10"
+                                              FontFamily="Montserrat"
+                                              Cursor="Hand" 
+                                              Click="btPlusTask_Click"
+                                             Grid.Column="1">
+
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background" Value="#7C65B5"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#FFC97F"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border CornerRadius="30" Height="25" Width="25" Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <Button x:Name="btnFilter"                          
+                                             BorderThickness="0"
+                                             Content="V"
+                                             Foreground="White"
+                                            Background="#7C65B5"
+                                             FontSize="14"
+                                             FontFamily="Montserrat"
+                                             Cursor="Hand"
+                                             Margin="0,10,0,10"
+
+                                             Grid.Column="2" 
+                                             Click="btnFilter_Click">
+
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background" Value="#7C65B5"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#FFC97F"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border CornerRadius="30" Height="25" Width="25" Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </Grid>
+
+                                <ScrollViewer Grid.Row ="1"  Margin="0,0,0,24" VerticalScrollBarVisibility="Auto">
+                                    <StackPanel Name="spTasksByProject" >
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+
+                        </Border>
+                           
+                    </Grid>
+
+                </Border>
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>
+
