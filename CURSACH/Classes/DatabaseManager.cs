@@ -19,6 +19,28 @@ namespace CURSACH
     {
         private const string ConnectionString = "Data Source=TecServis.db;Version=3;";
 
+        public static int GetNumberOfDoneRequests()
+        {
+            int numberOfDoneRequests = 0;
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = @"
+            SELECT COUNT(*) 
+            FROM Requests 
+            WHERE requestStatus = 'Готова к выдаче';"; 
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    numberOfDoneRequests = Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
+
+            return numberOfDoneRequests;
+        }
+
         public static void AddRequest(Request request)
         {
             using (var connection = new SQLiteConnection(ConnectionString))

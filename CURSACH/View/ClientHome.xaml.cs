@@ -63,9 +63,6 @@ namespace CURSACH.View
 
 
         // Кнопки управления бокового меню
-       
-
-
         private void btnProfile_Click(object sender, RoutedEventArgs e)
         {
             ProfileMain profile = new ProfileMain();
@@ -73,11 +70,7 @@ namespace CURSACH.View
             this.Hide();
         }
 
-       
-
-
         // Загрузка данных из бд по столбцам
-
         private void LoadInProcessRequests()
         {
             List<Request> requests = DatabaseManager.GetInProcessRequestsByClient();
@@ -217,5 +210,31 @@ namespace CURSACH.View
             LoadInProcessRequests();
             LoadDoneRequests();
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string requestNumber = tbNumber.Text;
+            if (int.TryParse(requestNumber, out int requestId))
+            {
+                Request request = DatabaseManager.GetRequestById(requestId);
+                if (request != null)
+                {
+                    DetailsWindow DetailsWindow = new DetailsWindow(request);
+                    DetailsWindow.ShowDialog(); // Отображаем окно как модальное
+                    LoadWaitingRequests();
+                    LoadInProcessRequests();
+                    LoadDoneRequests();
+                }
+                else
+                {
+                    MessageBox.Show("Заявка не найдена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите корректный номер заявки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
     }
 }
