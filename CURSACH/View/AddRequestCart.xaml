@@ -5,8 +5,257 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CURSACH.View"
         mc:Ignorable="d"
-        Title="AddRequestCart" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+    
+    Title="Team" Height="400" Width="533">
+
+    <Window.Resources>
+        <!-- Стиль для ComboBox -->
+        <Style x:Key="CustomComboBoxStyle" TargetType="ComboBoxItem">
+
+            <Setter Property="Foreground" Value="Black"/>
+            <!-- Цвет текста -->
+            <Setter Property="Background" Value="White"/>
+            <!-- Цвет фона -->
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <!-- Цвет границы -->
+            <Setter Property="BorderThickness" Value="1"/>
+            <!-- Толщина границы -->
+
+        </Style>
+
+        <Style TargetType="{x:Type DatePicker}">
+            <Style.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+
+
+                </Style>
+            </Style.Resources>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15"/>
+
+
+            <Style.Triggers>
+                <!-- your triggers here -->
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
+
     <Grid>
-        
+
+        <Border CornerRadius="30"
+         Background="#5B41A3"
+         BorderBrush="#7C65B5"
+         BorderThickness="4"
+
+         Opacity="0.4">
+
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Border CornerRadius="30"
+            Background="White"
+            BorderBrush="#7C65B5"
+            BorderThickness="4"
+            Margin="15"
+            >
+                <Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.7*"/>
+                            <RowDefinition Height="1.7*"/>
+
+                            <RowDefinition Height="0.5*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="btnCloseDetail"                           
+                                    BorderThickness="0"
+                                    Content="X"
+                                    Foreground="#7C65B5"
+                                    FontSize="20"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    Grid.Column="0"
+                                    Click="btnCloseDetails_Click"
+                                    VerticalAlignment="Top"
+                                    Margin="0,15,0,0">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background" Value="White"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFC97F"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Width="35" Height="35" CornerRadius="20" Background="{TemplateBinding Background}">
+                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+                                <ScrollViewer Grid.Column="1">
+                                    <TextBox x:Name="Description" Text="Описание"
+                                     Foreground="#160C31"
+                                     FontSize="25"
+                                     FontWeight="Bold"
+                                     FontFamily="Montserrat"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     TextWrapping="Wrap"
+                                     Margin="5"
+                                     BorderThickness="0"/>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <StackPanel>
+                                <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="4*"/>
+                                        </Grid.ColumnDefinitions>
+                                    <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\projectLogoWhiteBlack1.png" Grid.Column="0" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                                    <TextBlock  Text="Модель"
+                                                Foreground="#160C31"
+                                                FontSize="19"
+                                                FontFamily="Montserrat"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                TextWrapping="Wrap" Grid.Column="1" 
+                                                Margin="0,0,0,0"/>
+                                </Grid>
+                                
+
+                                <Border 
+                                            Background="#EDEDED"
+                                            CornerRadius="20"
+                                            BorderBrush="#D2CAE5"
+                                            BorderThickness="2"
+                                            Margin="20,0,20,10">
+
+                                    <TextBox  x:Name="tbModel"
+                                                BorderThickness="0"
+                                                Background="Transparent"
+                                                Foreground="#160C31"
+                                                FontSize="19"
+                                                FontFamily="Montserrat"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                TextWrapping="Wrap"
+                                                Grid.Column="1"/>
+                                </Border>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\projectLogoWhiteBlack1.png" Grid.Column="0" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                                    <TextBlock  Text="Тип"
+                Foreground="#160C31"
+                FontSize="19"
+                FontFamily="Montserrat"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                TextWrapping="Wrap" Grid.Column="1" 
+                Margin="0,0,0,0"/>
+                                </Grid>
+
+
+                                <Border 
+                                    Background="#EDEDED"
+                                    CornerRadius="20"
+                                    BorderBrush="#D2CAE5"
+                                    BorderThickness="2"
+                                    Margin="20,0,20,10">
+
+                                    <TextBox  x:Name="tbType"
+                                            BorderThickness="0"
+                                            Background="Transparent"
+                                            Foreground="#160C31"
+                                            FontSize="19"
+                                            FontFamily="Montserrat"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            TextWrapping="Wrap"
+                                            Grid.Column="1"/>
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
+
+                        <Grid Grid.Row="2">
+                            <Button x:Name="btnSave"   
+                                    Content="Сохранить"
+                                    Foreground="#160C31"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    FontSize="19"
+                                    VerticalAlignment="Center"
+                                    Click="btnSave_Click"
+                                    BorderBrush="Black"
+                                    BorderThickness="10"
+>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#F5F5F5"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFC97F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border  BorderBrush="#5B41A3" BorderThickness="1" CornerRadius="20" Width="190" Height="38" Background="{TemplateBinding Background}">
+                                            <ContentPresenter Margin="10,5,5,10" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+
+            </Border>
+
+
+        </Grid>
     </Grid>
 </Window>
+

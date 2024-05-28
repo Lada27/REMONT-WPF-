@@ -125,7 +125,7 @@ namespace CURSACH.View
         private void OpenTaskDetails(Tasks task)
         {
             // Создаем новое окно с подробной информацией о задаче
-            TaskDetailsWindow taskDetailsWindow = new TaskDetailsWindow(task);
+            DetailsWindow taskDetailsWindow = new DetailsWindow(task);
             taskDetailsWindow.ShowDialog(); // Отображаем окно как модальное
 
             loadTasksByProjectId_Click(selectedProjectId);
@@ -136,7 +136,7 @@ namespace CURSACH.View
         // добавления задач и проектоы
         private void btPlusTask_Click(object sender, RoutedEventArgs e)
         {
-            TaskDetailsWindow taskDetailsWindow = new TaskDetailsWindow(selectedProjectId);
+            DetailsWindow taskDetailsWindow = new DetailsWindow(selectedProjectId);
             taskDetailsWindow.ShowDialog(); // Отображаем окно как модальное
             loadTasksByProjectId_Click(selectedProjectId);
 

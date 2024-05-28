@@ -14,7 +14,7 @@ namespace CURSACH.Classes
     public class DatabaseHelper { 
 
     private const string DatabaseName = "TecServis.db";
-    private const int CurrentDatabaseVersion = 2; // Обновите версию базы данных
+    private const int CurrentDatabaseVersion = 3; // Обновите версию базы данных
 
     public DatabaseHelper()
     {

@@ -17,9 +17,217 @@ namespace CURSACH
 {
     internal class DatabaseManager
     {
-        private const string ConnectionString = "Data Source=TecServis.db;Version=2;";
+        private const string ConnectionString = "Data Source=TecServis.db;Version=3;";
 
-        public static List<Notification> GetUserNotifications(int userId)
+        public static void AddRequest(Request request)
+        {
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = @"
+                    INSERT INTO Requests (startDate, homeTechType, homeTechModel, problemDescryption, requestStatus) 
+                    VALUES (@startDate, @homeTechType, @homeTechModel, @problemDescryption, @requestStatus);";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@startDate", request.startDate);
+                    command.Parameters.AddWithValue("@homeTechType", request.homeTechType);
+                    command.Parameters.AddWithValue("@homeTechModel", request.homeTechModel);
+                    command.Parameters.AddWithValue("@problemDescryption", request.problemDescryption);
+                    command.Parameters.AddWithValue("@requestStatus", request.requestStatus);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        public static void UpdateRequest(Request request)
+        {
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = @"
+            UPDATE Requests
+            SET 
+                problemDescryption = @problemDescryption,
+                completionDate = @completionDate,
+                startDate = @startDate,
+                requestStatus = @requestStatus,
+                masterID = @masterID,
+                homeTechModel = @homeTechModel,
+                repairParts = @repairParts
+            WHERE 
+                requestID = @requestID";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@problemDescryption", request.problemDescryption);
+                    command.Parameters.AddWithValue("@completionDate", request.completionDate);
+                    command.Parameters.AddWithValue("@startDate", request.startDate);
+                    command.Parameters.AddWithValue("@requestStatus", request.requestStatus);
+                    command.Parameters.AddWithValue("@masterID", request.masterID == -1 ? (object)DBNull.Value : request.masterID); // Если masterID равен -1, установить значение DBNull
+                    command.Parameters.AddWithValue("@homeTechModel", request.homeTechModel);
+                    command.Parameters.AddWithValue("@repairParts", request.repairParts);
+                    command.Parameters.AddWithValue("@requestID", request.requestID);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static List<Comment> GetCommentsByRequestId(int requestId)
+        {
+            List<Comment> comments = new List<Comment>();
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = @"
+            SELECT commentID, message, masterID, requestID
+            FROM Comments
+            WHERE requestID = @requestId";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@requestId", requestId);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            comments.Add(new Comment
+                            {
+                                commentID = reader.GetInt32(0),
+                                message = reader.GetString(1),
+                                masterID = reader.IsDBNull(2) ? (int?)null : reader.GetInt32(2),
+                                requestID = reader.GetInt32(3)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return comments;
+        }
+
+        public static Request GetRequestById(int requestId)
+        {
+            Request request = null;
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = @"
+            SELECT requestID, startDate, homeTechType, homeTechModel, problemDescryption, 
+                   requestStatus, completionDate, repairParts, masterID, clientID
+            FROM Requests
+            WHERE requestID = @requestId";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@requestId", requestId);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            request = new Request
+                            {
+                                requestID = reader.GetInt32(0),
+                                startDate = reader.GetDateTime(1),
+                                homeTechType = reader.GetString(2),
+                                homeTechModel = reader.GetString(3),
+                                problemDescryption = reader.GetString(4),
+                                requestStatus = reader.GetString(5),
+                                completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
+                                repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
+                                masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
+                                clientID = reader.GetInt32(9)
+                            };
+                        }
+                    }
+                }
+            }
+
+            return request;
+        }
+
+        public static List<User> GetAllMasters()
+        {
+            List<User> masters = new List<User>();
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT userID, fio, phone, login, password, type FROM Users WHERE type = @type";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@type", "Мастер");
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            User master = new User
+                            {
+                                userID = reader.GetInt32(0),
+                                fio = reader.GetString(1),
+                                phone = reader.GetString(2),
+                                login = reader.GetString(3),
+                                password = reader.GetString(4),
+                                type = reader.GetString(5)
+                            };
+
+                            masters.Add(master);
+                        }
+                    }
+                }
+            }
+
+            return masters;
+        }
+
+        public static User GetUserById(int userId)
+        {
+            User user = null;
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT userID, fio, phone, login, password, type FROM Users WHERE userID = @userId";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", userId);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            user = new User
+                            {
+                                userID = reader.GetInt32(0),
+                                fio = reader.GetString(1),
+                                phone = reader.GetString(2),
+                                login = reader.GetString(3),
+                                password = reader.GetString(4),
+                                type = reader.GetString(5)
+                            };
+                        }
+                    }
+                }
+            }
+
+            return user;
+        }
+
+        public static List<Notification> GetUserNotifications()
         {
             var notifications = new List<Notification>();
 
@@ -34,7 +242,7 @@ namespace CURSACH
 
                 using (var command = new SQLiteCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@userId", userId);
+                    command.Parameters.AddWithValue("@userId", CurrentUser.userId);
 
                     using (var reader = command.ExecuteReader())
                     {
@@ -58,7 +266,7 @@ namespace CURSACH
             return notifications;
         }
 
-        public bool AddUser(string fio, string phone, string login, string password, string type)
+        public static bool AddUser(string fio, string phone, string login, string password, string type)
         {
             try
             {
@@ -92,7 +300,162 @@ namespace CURSACH
             }
         }
 
-        public static List<Request> GetWaitingRequests()
+        
+        public static List<Request> GetWaitingRequestsByClient()
+        {
+            List<Request> requests = new List<Request>();
+
+            try
+            {
+                using (var connection = new SQLiteConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    string query = @"
+                        SELECT requestID, startDate, homeTechType, homeTechModel, problemDescryption, requestStatus, completionDate, repairParts, masterID, clientID
+                        FROM Requests
+                        WHERE clientID = @clientID AND requestStatus = 'Новая заявка';";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@clientID", CurrentUser.userId);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var request = new Request
+                                {
+                                    requestID = reader.GetInt32(0),
+                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
+                                homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
+                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
+                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
+                                repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
+                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
+                                    clientID = reader.GetInt32(9)
+                                };
+
+                                requests.Add(request);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Здесь можно добавить логирование ошибки
+                Console.WriteLine($"Error getting waiting requests: {ex.Message}");
+            }
+
+            return requests;
+        }
+        public static List<Request> GetInProcessRequestsByClient()
+        {
+            List<Request> requests = new List<Request>();
+
+            try
+            {
+                using (var connection = new SQLiteConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    string query = @"
+                        SELECT requestID, startDate, homeTechType, homeTechModel, problemDescryption, requestStatus, completionDate, repairParts, masterID, clientID
+                        FROM Requests
+                        WHERE clientID = @clientID AND requestStatus = 'В процессе ремонта';";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@clientID", CurrentUser.userId);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var request = new Request
+                                {
+                                    requestID = reader.GetInt32(0),
+                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
+                                    homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
+                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
+                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
+                                    repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
+                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
+                                    clientID = reader.GetInt32(9)
+                                };
+
+                                requests.Add(request);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Здесь можно добавить логирование ошибки
+                Console.WriteLine($"Error getting waiting requests: {ex.Message}");
+            }
+
+            return requests;
+        }
+        public static List<Request> GetDoneRequestsByClient()
+        {
+            List<Request> requests = new List<Request>();
+
+            try
+            {
+                using (var connection = new SQLiteConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    string query = @"
+                        SELECT requestID, startDate, homeTechType, homeTechModel, problemDescryption, requestStatus, completionDate, repairParts, masterID, clientID
+                        FROM Requests
+                        WHERE clientID = @clientID AND requestStatus = 'Готова к выдаче';";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@clientID", CurrentUser.userId);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var request = new Request
+                                {
+                                    requestID = reader.GetInt32(0),
+                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
+                                    homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
+                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
+                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
+                                    repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
+                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
+                                    clientID = reader.GetInt32(9)
+                                };
+
+                                requests.Add(request);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Здесь можно добавить логирование ошибки
+                Console.WriteLine($"Error getting waiting requests: {ex.Message}");
+            }
+
+            return requests;
+        }
+
+        public static List<Request> GetWaitingRequestsByMaster()
         {
             List<Request> requests = new List<Request>();
 
@@ -109,7 +472,7 @@ namespace CURSACH
 
                     using (var command = new SQLiteCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@masterID", CurrentUser.UserId);
+                        command.Parameters.AddWithValue("@masterID", CurrentUser.userId);
 
                         using (var reader = command.ExecuteReader())
                         {
@@ -118,12 +481,12 @@ namespace CURSACH
                                 var request = new Request
                                 {
                                     requestID = reader.GetInt32(0),
-                                    startDate = reader.IsDBNull(1) ? null : reader.GetString(1),
+                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
                                     homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
                                     homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
                                     problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
                                     requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = reader.IsDBNull(6) ? null : reader.GetString(6),
+                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
                                     repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
                                     masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
                                     clientID = reader.GetInt32(9)
@@ -143,7 +506,7 @@ namespace CURSACH
 
             return requests;
         }
-        public static List<Request> GetInProcessRequests()
+        public static List<Request> GetInProcessRequestsByMaster()
         {
             List<Request> requests = new List<Request>();
 
@@ -160,7 +523,7 @@ namespace CURSACH
 
                     using (var command = new SQLiteCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@masterID", CurrentUser.UserId);
+                        command.Parameters.AddWithValue("@masterID", CurrentUser.userId);
 
                         using (var reader = command.ExecuteReader())
                         {
@@ -169,12 +532,12 @@ namespace CURSACH
                                 var request = new Request
                                 {
                                     requestID = reader.GetInt32(0),
-                                    startDate = reader.IsDBNull(1) ? null : reader.GetString(1),
+                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
                                     homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
                                     homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
                                     problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
                                     requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = reader.IsDBNull(6) ? null : reader.GetString(6),
+                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
                                     repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
                                     masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
                                     clientID = reader.GetInt32(9)
@@ -194,7 +557,7 @@ namespace CURSACH
 
             return requests;
         }
-        public static List<Request> GetDoneRequests()
+        public static List<Request> GetDoneRequestsByMaster()
         {
             List<Request> requests = new List<Request>();
 
@@ -211,7 +574,7 @@ namespace CURSACH
 
                     using (var command = new SQLiteCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@masterID", CurrentUser.UserId);
+                        command.Parameters.AddWithValue("@masterID", CurrentUser.userId);
 
                         using (var reader = command.ExecuteReader())
                         {
@@ -220,12 +583,12 @@ namespace CURSACH
                                 var request = new Request
                                 {
                                     requestID = reader.GetInt32(0),
-                                    startDate = reader.IsDBNull(1) ? null : reader.GetString(1),
+                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
                                     homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
                                     homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
                                     problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
                                     requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = reader.IsDBNull(6) ? null : reader.GetString(6),
+                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
                                     repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
                                     masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
                                     clientID = reader.GetInt32(9)
@@ -245,8 +608,6 @@ namespace CURSACH
 
             return requests;
         }
-
-
 
 
         internal static List<Tasks> GetTasksByStatusAndUserId(int userId, string status)
@@ -322,43 +683,6 @@ namespace CURSACH
         }
 
 
-        internal static Users GetUserById(int userId)
-        {
-            Users user = null;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string query = "SELECT * FROM Users WHERE Id = @UserId";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@UserId", userId);
-
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                user = new Users();
-                                user.Id = reader.GetInt32(reader.GetOrdinal("Id"));
-                                user.Email = reader.GetString(reader.GetOrdinal("Email"));
-                                user.Name = reader.GetString(reader.GetOrdinal("UserName"));
-                                user.Password = reader.GetString(reader.GetOrdinal("UserPassword"));
-                                user.Phone = reader.IsDBNull(reader.GetOrdinal("Phone")) ? null : reader.GetString(reader.GetOrdinal("Phone"));
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Ошибка при получении пользователя из базы данных: " + ex.Message);
-            }
-
-            return user;
-        }
 
 
         public static int AuthenticateUser(string login, string password)

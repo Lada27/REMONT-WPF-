@@ -196,16 +196,16 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image x:Name="imgEmployees" Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\teamLogoWhite.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button x:Name="btnEmployees"                          
+                            <Button x:Name="btnTeam"                          
                                  BorderThickness="0"
-                                 Content="Сотрудники"
+                                 Content="Команда"
                                  Foreground="White"
                                  FontSize="14"
                                  FontFamily="Montserrat"
                                  Cursor="Hand"
                                  Margin="0,0,0,0"
                                  VerticalAlignment="Center"
-                                 Grid.Column="1" Click="btnEmployees_Click"
+                                 Grid.Column="1" Click="btnTeam_Click"
                                  >
 
                                 <Button.Style>

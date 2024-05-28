@@ -144,7 +144,7 @@ namespace CURSACH.View
         private void OpenTaskDetails(Tasks task)
         {
             // Создаем новое окно с подробной информацией о задаче
-            TaskDetailsWindow taskDetailsWindow = new TaskDetailsWindow(task);
+            DetailsWindow taskDetailsWindow = new DetailsWindow(task);
             taskDetailsWindow.ShowDialog(); // Отображаем окно как модальное
 
             loadAllUsers();
@@ -279,7 +279,7 @@ namespace CURSACH.View
 
             private void btnAddTaskByUser_Click(object sender, RoutedEventArgs e)
             {
-                TaskDetailsWindow taskDetailsWindow = new TaskDetailsWindow();
+                DetailsWindow taskDetailsWindow = new DetailsWindow();
                 taskDetailsWindow.ShowDialog(); // Отображаем окно как модальное
                 
             }

@@ -27,9 +27,46 @@ namespace CURSACH.View
 
         private void LoadNotifications()
         {
-            int currentUserId = CurrentUser.UserId;
-            var notifications = DatabaseManager.GetUserNotifications(currentUserId);
+            
+            var notifications = DatabaseManager.GetUserNotifications();
             NotificationsDataGrid.ItemsSource = notifications;
+        }
+
+         
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentUser.type == "Клиент")
+            {
+                ClientHome home = new ClientHome();
+                home.Show();
+                this.Hide();
+            }
+            else if (CurrentUser.type == "Мастер") 
+            {
+                MasterHome home = new MasterHome();
+                home.Show();
+                this.Hide();
+            }
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            string confirmationMessage = "Вы уверены, что хотите выйти из профиля?";
+
+            MessageBoxResult result = MessageBox.Show(confirmationMessage, "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                CurrentUser.userId = 0;
+                CurrentUser.fio = null;
+                CurrentUser.password = null;
+                CurrentUser.login = null;
+                CurrentUser.phone = null;
+
+                LoginView loginView = new LoginView();
+                loginView.Show();
+                this.Hide();
+            }
         }
     }
 }

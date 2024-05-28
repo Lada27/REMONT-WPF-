@@ -1,4 +1,4 @@
-﻿<Window x:Class="CURSACH.View.TaskDetailsWindow"
+﻿<Window x:Class="CURSACH.View.DetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -349,8 +349,7 @@
                                                     Grid.Column="0"/>
 
                                                     <DatePicker Name="dpStartDate" 
-                                                        SelectedDate="{Binding Deadline}" 
-                                                        SelectedDateChanged="DatePicker_SelectedDateChanged"
+                                                        SelectedDateChanged="DatePicker_SelectedStartDateChanged"
                                                         IsDropDownOpen="True" 
                                                         SelectedDateFormat="Short"
                                                         Margin="10,2"
@@ -408,7 +407,6 @@
                                                  Grid.Column="0"/>
 
                                                     <DatePicker Name="dpEndDate" 
-                                                     SelectedDate="{Binding EndDate}" 
                                                      SelectedDateChanged="DatePicker_SelectedEndDateChanged"
                                                      IsDropDownOpen="True" 
                                                      SelectedDateFormat="Short"
@@ -493,17 +491,9 @@
                                             Margin="0,0,0,10"
                                            >
 
-                                        <TextBox x:Name="Comments"
-                                                 BorderThickness="0"
-                                                 Background="Transparent"
-                                                 Foreground="#160C31"
-                                                 FontSize="19"
-                                                 FontFamily="Montserrat"
-                                                 HorizontalAlignment="Center"
-                                                 VerticalAlignment="Center"
-                                                 TextWrapping="Wrap" 
-                                                 Width="200"
-                                                 />
+                                        <ScrollViewer>
+                                            <StackPanel x:Name="CommentsPanel" />
+                                        </ScrollViewer>
 
                                     </Border>
                                 </Grid>

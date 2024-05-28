@@ -36,9 +36,9 @@ namespace CURSACH.View {
     
     
     /// <summary>
-    /// TaskDetailsWindow
+    /// DetailsWindow
     /// </summary>
-    public partial class TaskDetailsWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+    public partial class DetailsWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
         #line 96 "..\..\..\View\TaskDetailsWindow.xaml"

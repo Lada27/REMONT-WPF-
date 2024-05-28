@@ -5,8 +5,465 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CURSACH.View"
         mc:Ignorable="d"
-        Title="ManagerHome" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+    
+    Title="Profile" Height="400" Width="533">
+
+    <Border CornerRadius="30"
+     Background="#5B41A3"
+     BorderBrush="#7C65B5"
+     BorderThickness="4">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Профиль"
+                       Foreground="DarkGray"
+                       FontSize="10"
+                       FontFamily="Montserrat"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+                <Button x:Name="btnMinimize"                           
+                    BorderThickness="0"
+                    Content="-"
+                    Foreground="White"
+                    FontSize="16"
+                    FontFamily="Montserrat"
+                    Cursor="Hand"
+                    Grid.Column="1"
+                    Click="btnMinimize_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#28AEED"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#278BEF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
+                                CornerRadius="9"
+                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="btnMaximaze"                           
+            BorderThickness="0"
+            Content="[ ]"
+            Foreground="White"
+            FontSize="10"
+            FontFamily="Montserrat"
+            Cursor="Hand"
+            Grid.Column="2"
+            Click="btnMaximaze_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#28AEED"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#278BEF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
+                CornerRadius="9"
+                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="btnClose"                          
+                    BorderThickness="0"
+                    Content="X"
+                    Foreground="White"
+                    FontSize="12"
+                    FontFamily="Montserrat"
+                    Cursor="Hand"
+                    Grid.Column="3"
+                    Click="btnClose_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#DA34AE"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#C62DAE"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
+                                CornerRadius="9"
+                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="112"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+
+                <Border CornerRadius="30"
+                        Background="#7C65B5"
+                        Margin="5"
+                        Grid.Column="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\homeLogo.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button x:Name="btnHome"                          
+                                    BorderThickness="0"
+                                    Content="Заявки"
+                                    Foreground="#FFC97F"
+                                    FontSize="14"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    Margin="0,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="1" Click="btnHome_Click"
+                                    >
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#7C65B5"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#7C65B5"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="5" Width="55" Height="20" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="imgEmployees" Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\teamLogoWhite.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button x:Name="btnEmployees"                          
+                                 BorderThickness="0"
+                                 Content="Сотрудники"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 FontFamily="Montserrat"
+                                 Cursor="Hand"
+                                 Margin="0,0,0,0"
+                                 VerticalAlignment="Center"
+                                 Grid.Column="1" Click="btnEmployees_Click"
+                                 >
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#7C65B5"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFC97F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="5" Width="55" Height="20" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\profileLogoWhite.png" Grid.Column="0" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button x:Name="btnProfile"                          
+                                    BorderThickness="0"
+                                    Content="Профиль"
+                                    Foreground="White"
+                                    FontSize="14"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    Margin="0,0,0,0"
+                                    Grid.Column="1">
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#7C65B5"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#7C65B5"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="5" Width="59" Height="20" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </Grid>
+
+
+                </Border>
+
+                <Border CornerRadius="30"
+                        Background="White"
+                        Margin="5"
+                        Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.4*"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.4*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <TextBlock  Text="Статистика"
+                                        FontWeight="Bold"
+                                        Foreground="#160C31"
+                                        FontSize="19"
+                                        FontFamily="Montserrat"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap "/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition  Width="0.5*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition  Width="0.5*"/>
+                                <ColumnDefinition  Width="0.2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock  Text="Общее количество выполненных заявок:"
+                                        Foreground="#160C31"
+                                        FontSize="16"
+                                        FontFamily="Montserrat"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap "
+                                        Grid.Column="1"/>
+                            <TextBlock  x:Name="NumberOfRequests" Text="233"
+                                        Foreground="#160C31"
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        FontFamily="Montserrat"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap "
+                                        Grid.Column="2"/>
+                            <TextBlock  Text="Среднее время выполнения (в днях):"
+                                        Foreground="#160C31"
+                                        FontSize="16"
+                                        FontFamily="Montserrat"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap "
+                                        Grid.Column="3"/>
+                            <TextBlock  Name="MidTime" Text="233"
+                                         Foreground="#160C31"
+                                         FontSize="16"
+                                         FontWeight="Bold"
+                                         FontFamily="Montserrat"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         TextWrapping="Wrap "
+                                         Grid.Column="4"/>      
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <TextBlock  Text="Статистика по типам неисправностей"
+                                        FontWeight="Bold"
+                                        Foreground="#160C31"
+                                        FontSize="19"
+                                        FontFamily="Montserrat"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap "
+                                        Grid.Column="1"/>           
+
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition  Width="0.2*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock  Text="Введите тип неисправности:"
+                                        Foreground="#160C31"
+                                        FontSize="16"
+                                        FontFamily="Montserrat"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap "
+                                        Grid.Column="1"/>
+                            <TextBox    x:Name="TypeInput"
+                                        Foreground="#160C31"
+                                        FontSize="16"
+                                        FontFamily="Montserrat"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap "
+                                        Width="100"
+                                        Height="35"
+                                        BorderThickness="0,0,0,2"
+                                        Background="Transparent"
+                                        Grid.Column="2"/>
+                            <Button x:Name="btnSearch"                          
+                                      BorderThickness="0"
+                                      Content="Искать"
+                                      Foreground="White"
+                                      FontSize="14"
+                                      FontFamily="Montserrat"
+                                      Cursor="Hand"
+                                      VerticalAlignment="Center"
+                                      Grid.Column="3" Click="btnSearch_Click"
+                                      > 
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#7C65B5"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFC97F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="5" Width="70" Height="25" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition  Width="0.2*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock  Text="Заявок:"
+            Foreground="#160C31"
+            FontSize="16"
+            FontFamily="Montserrat"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            TextWrapping="Wrap "
+            Grid.Column="1"/>
+                            <TextBlock  x:Name="NumberOfFilteredRequests" Text="233"
+            Foreground="#160C31"
+            FontSize="16"
+            FontWeight="Bold"
+            FontFamily="Montserrat"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            TextWrapping="Wrap "
+            Grid.Column="2"/>
+                            <TextBlock  Text="Среднее время выполнения (в днях):"
+            Foreground="#160C31"
+            FontSize="16"
+            FontFamily="Montserrat"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            TextWrapping="Wrap "
+            Grid.Column="3"/>
+                            <TextBlock  Name="MidTimeOfFiltered" Text="233"
+             Foreground="#160C31"
+             FontSize="16"
+             FontWeight="Bold"
+             FontFamily="Montserrat"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center"
+             TextWrapping="Wrap "
+             Grid.Column="4"/>
+                        </Grid>
+
+                    </Grid>
+                </Border>
+            </Grid>
+
+        </Grid>
+    </Border>
 </Window>
+

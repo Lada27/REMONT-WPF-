@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 \\Mac\Home\Downloads\CURSACH-WPF--main 3\CURSACH\App.xaml
-17-218394955
+161533966537
 
-32-2109002925
+31-202115853
 601589794630
-MainWindow.xaml;View\AddProjectWindow.xaml;View\AddRequestCart.xaml;View\FilterWindow.xaml;View\ManagerHome.xaml;View\MasterHome.xaml;View\OperHome.xaml;View\ProfileMain.xaml;View\SignUpView.xaml;View\StatusFilterWindow.xaml;View\UrgentTasksFilter.xaml;View\ClientHome.xaml;View\LoginView.xaml;View\ProfileVip.xaml;View\Projects.xaml;View\TaskDetailsWindow.xaml;View\Team.xaml;
+MainWindow.xaml;View\AddRequestCart.xaml;View\FilterWindow.xaml;View\ManagerHome.xaml;View\MasterHome.xaml;View\OperHome.xaml;View\ProfileMain.xaml;View\SignUpView.xaml;View\StatusFilterWindow.xaml;View\UrgentTasksFilter.xaml;View\ClientHome.xaml;View\LoginView.xaml;View\ProfileVip.xaml;View\Projects.xaml;View\DetailsWindow.xaml;View\Team.xaml;
 
 True
 

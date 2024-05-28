@@ -9,9 +9,12 @@ namespace CURSACH
 {
     public static class CurrentUser
     {
-        private static int userId;
-
-        public static int UserId { get => userId; set => userId = value; }
+        public static int userId;
+        public static string fio;
+        public static string phone;
+        public static string login;
+        public static string password;
+        public static string type;
 
     }
 }
