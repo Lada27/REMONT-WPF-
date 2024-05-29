@@ -125,7 +125,9 @@
                                 </Button>
 
                                 <ScrollViewer Grid.Column="1">
-                                    <TextBox x:Name="Description" Text="Описание"
+                                    <TextBox x:Name="Description"
+                                             Width="350"
+                                             Height="50"
                                      Foreground="#160C31"
                                      FontSize="25"
                                      FontWeight="Bold"
@@ -149,6 +151,7 @@
                                     <Image Source="C:\Users\lada\source\repos\CURSACH\CURSACH\Images\projectLogoWhiteBlack1.png" Grid.Column="0" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                                     <TextBlock  Text="Модель"
+                                                
                                                 Foreground="#160C31"
                                                 FontSize="19"
                                                 FontFamily="Montserrat"
@@ -168,6 +171,8 @@
 
                                     <TextBox  x:Name="tbModel"
                                                 BorderThickness="0"
+                                              Height="60"
+                                              Width="400"
                                                 Background="Transparent"
                                                 Foreground="#160C31"
                                                 FontSize="19"
@@ -204,6 +209,8 @@
                                     Margin="20,0,20,10">
 
                                     <TextBox  x:Name="tbType"
+                                              Height="60"
+Width="400"
                                             BorderThickness="0"
                                             Background="Transparent"
                                             Foreground="#160C31"

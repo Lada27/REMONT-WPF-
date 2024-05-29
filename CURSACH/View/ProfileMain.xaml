@@ -275,7 +275,7 @@
                                         FontFamily="Montserrat"
                                         VerticalAlignment="Center"/>
 
-                                <TextBlock Name="UserName" Text="Ржанникова Лада Сергеевна"
+                                <TextBlock Name="UserName" 
                                          Foreground="Black"
                                          TextWrapping="Wrap"
                                          Background="Transparent"
@@ -296,7 +296,7 @@
                                         FontFamily="Montserrat"
                                         VerticalAlignment="Center"/>
 
-                                <TextBlock Name="UserRole" Text="role"
+                                <TextBlock Name="UserType"
                                     TextAlignment="Left"
                                     Foreground="Black"
                                     HorizontalAlignment="Left"
@@ -350,7 +350,7 @@
                                       FontFamily="Montserrat"
                                       VerticalAlignment="Center"/>
 
-                                <TextBlock Name="UserPhone" Text="phone"
+                                <TextBlock Name="UserPhone" 
                                       TextAlignment="Left"
                                       Foreground="Black"
                                       HorizontalAlignment="Left"
@@ -370,7 +370,7 @@
                                       FontFamily="Montserrat"
                                       VerticalAlignment="Center"/>
 
-                                <TextBlock Name="UserPassword" Text="password"
+                                <TextBlock Name="UserPassword" 
                                       Foreground="Black"
                                       HorizontalAlignment="Left"
                                       Background="Transparent"
@@ -391,7 +391,7 @@
                                    FontFamily="Montserrat"
                                    VerticalAlignment="Center"/>
 
-                                <TextBlock Name="UserEmail" Text="email"
+                                <TextBlock Name="UserEmail" 
                                    TextAlignment="Left"
                                    Foreground="Black"
                                    HorizontalAlignment="Left"

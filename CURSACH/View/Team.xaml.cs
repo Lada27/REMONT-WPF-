@@ -20,7 +20,7 @@ namespace CURSACH.View
     /// </summary>
     public partial class Team : Window
     {
-        int SelectedUserId = CurrentUser.userId;
+        int SelectedUserId = 2;
         public Team()
         {
             InitializeComponent();

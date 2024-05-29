@@ -482,7 +482,19 @@
                                          TextWrapping="Wrap" 
                                          Grid.Column="0"/>
 
-                                    <Border Grid.Column="1"
+                                    <StackPanel Grid.Column="1">
+                                        <TextBox Width="200"
+                                                 Height="40"
+                                                 Foreground="#160C31"
+                                                 BorderThickness="0,0,0,2"
+                                                 BorderBrush="Black"
+                                                 FontSize="19"
+                                                 FontFamily="Montserrat"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 TextWrapping="Wrap" />
+                                        
+                                        <Border 
                                             Background="#EDEDED"
                                             CornerRadius="20"
                                             BorderBrush="#D2CAE5"
@@ -490,11 +502,13 @@
                                             Margin="0,0,0,10"
                                            >
 
-                                        <ScrollViewer>
-                                            <StackPanel x:Name="CommentsPanel" />
-                                        </ScrollViewer>
+                                            <ScrollViewer>
+                                                <StackPanel x:Name="CommentsPanel" />
+                                            </ScrollViewer>
 
-                                    </Border>
+                                        </Border>
+
+                                    </StackPanel>
                                 </Grid>
                                 <Grid  Margin="25, 0" >
                                     <Grid.ColumnDefinitions>

@@ -318,7 +318,7 @@
                                         VerticalAlignment="Center"
                                         TextWrapping="Wrap "
                                         Grid.Column="1"/>
-                            <TextBlock  x:Name="NumberOfRequests" Text="233"
+                            <TextBlock  x:Name="NumberOfRequests" 
                                         Foreground="#160C31"
                                         FontSize="16"
                                         FontWeight="Bold"
@@ -335,7 +335,7 @@
                                         VerticalAlignment="Center"
                                         TextWrapping="Wrap "
                                         Grid.Column="3"/>
-                            <TextBlock  Name="MidTime" Text="233"
+                            <TextBlock  Name="MidTime"
                                          Foreground="#160C31"
                                          FontSize="16"
                                          FontWeight="Bold"
@@ -354,9 +354,10 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         TextWrapping="Wrap "
-                                        Grid.Column="1"/>           
+                                        Grid.Column="1"/>
 
                         </Grid>
+
                         <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.2*"/>
@@ -365,7 +366,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition  Width="0.2*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock  Text="Введите тип неисправности:"
+                            <TextBlock  Text="Введите тип техники:"
                                         Foreground="#160C31"
                                         FontSize="16"
                                         FontFamily="Montserrat"
@@ -432,7 +433,7 @@
             VerticalAlignment="Center"
             TextWrapping="Wrap "
             Grid.Column="1"/>
-                            <TextBlock  x:Name="NumberOfFilteredRequests" Text="233"
+                            <TextBlock  x:Name="NumberOfFilteredRequests" 
             Foreground="#160C31"
             FontSize="16"
             FontWeight="Bold"
@@ -449,7 +450,7 @@
             VerticalAlignment="Center"
             TextWrapping="Wrap "
             Grid.Column="3"/>
-                            <TextBlock  Name="MidTimeOfFiltered" Text="233"
+                            <TextBlock  Name="MidTimeOfFiltered" 
              Foreground="#160C31"
              FontSize="16"
              FontWeight="Bold"

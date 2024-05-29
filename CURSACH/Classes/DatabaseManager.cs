@@ -227,16 +227,16 @@ namespace CURSACH
                             {
                                 var request = new Request
                                 {
-                                    requestID = reader.GetInt32(0),
-                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
-                                    homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
-                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
-                                    repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
-                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
-                                    clientID = reader.GetInt32(9)
+                                    requestID = Convert.ToInt32(reader["requestID"]),
+                                    startDate = reader.IsDBNull(reader.GetOrdinal("startDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["startDate"]),
+                                    homeTechType = reader["homeTechType"].ToString(),
+                                    homeTechModel = reader["homeTechModel"].ToString(),
+                                    problemDescryption = reader["problemDescryption"].ToString(),
+                                    requestStatus = reader["requestStatus"].ToString(),
+                                    completionDate = reader.IsDBNull(reader.GetOrdinal("completionDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["completionDate"]),
+                                    repairParts = reader["repairParts"].ToString(),
+                                    masterID = reader.IsDBNull(reader.GetOrdinal("masterID")) ? (int?)null : Convert.ToInt32(reader["masterID"]),
+                                    clientID = Convert.ToInt32(reader["clientID"])
                                 };
 
                                 unassignedRequests.Add(request);
@@ -350,7 +350,7 @@ namespace CURSACH
                 connection.Open();
 
                 string query = @"
-            SELECT AVG(julianday(completionDate) - julianday(starteDate)) 
+            SELECT AVG(julianday(completionDate) - julianday(startDate)) 
             FROM Requests 
             WHERE requestStatus = 'Готова к выдаче';"; 
 
@@ -396,8 +396,8 @@ namespace CURSACH
                 connection.Open();
 
                 string query = @"
-                    INSERT INTO Requests (startDate, homeTechType, homeTechModel, problemDescryption, requestStatus) 
-                    VALUES (@startDate, @homeTechType, @homeTechModel, @problemDescryption, @requestStatus);";
+                    INSERT INTO Requests (startDate, homeTechType, homeTechModel, problemDescryption, requestStatus, clientID) 
+                    VALUES (@startDate, @homeTechType, @homeTechModel, @problemDescryption, @requestStatus, @clientID);";
 
                 using (var command = new SQLiteCommand(query, connection))
                 {
@@ -406,6 +406,8 @@ namespace CURSACH
                     command.Parameters.AddWithValue("@homeTechModel", request.homeTechModel);
                     command.Parameters.AddWithValue("@problemDescryption", request.problemDescryption);
                     command.Parameters.AddWithValue("@requestStatus", request.requestStatus);
+                    command.Parameters.AddWithValue("@clientID", CurrentUser.userId);
+
 
                     command.ExecuteNonQuery();
                 }
@@ -482,7 +484,7 @@ namespace CURSACH
             return comments;
         }
 
-        public static Request GetRequestById(int requestId)
+        public static Request GetRequestByIdWait(int requestId)
         {
             Request request = null;
 
@@ -524,6 +526,50 @@ namespace CURSACH
 
             return request;
         }
+
+        public static Request GetRequestById(int requestId)
+        {
+            Request request = null;
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = @"
+                    SELECT requestID, startDate, homeTechType, homeTechModel, problemDescryption, 
+                           requestStatus, completionDate, repairParts, masterID, clientID
+                    FROM Requests
+                    WHERE requestID = @requestId";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@requestId", requestId);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            request = new Request
+                            {
+                                requestID = Convert.ToInt32(reader["requestID"]),
+                                startDate = reader.IsDBNull(reader.GetOrdinal("startDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["startDate"]),
+                                homeTechType = reader["homeTechType"].ToString(),
+                                homeTechModel = reader["homeTechModel"].ToString(),
+                                problemDescryption = reader["problemDescryption"].ToString(),
+                                requestStatus = reader["requestStatus"].ToString(),
+                                completionDate = reader.IsDBNull(reader.GetOrdinal("completionDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["completionDate"]),
+                                repairParts = reader["repairParts"].ToString(),
+                                masterID = reader.IsDBNull(reader.GetOrdinal("masterID")) ? (int?)null : Convert.ToInt32(reader["masterID"]),
+                                clientID = Convert.ToInt32(reader["clientID"])
+                            };
+                        }
+                    }
+                }
+            }
+
+            return request;
+        }
+
 
         public static List<User> GetAllMasters()
         {
@@ -696,16 +742,16 @@ namespace CURSACH
                             {
                                 var request = new Request
                                 {
-                                    requestID = reader.GetInt32(0),
-                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
-                                homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
-                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
-                                repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
-                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
-                                    clientID = reader.GetInt32(9)
+                                    requestID = Convert.ToInt32(reader["requestID"]),
+                                    startDate = reader.IsDBNull(reader.GetOrdinal("startDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["startDate"]),
+                                    homeTechType = reader["homeTechType"].ToString(),
+                                    homeTechModel = reader["homeTechModel"].ToString(),
+                                    problemDescryption = reader["problemDescryption"].ToString(),
+                                    requestStatus = reader["requestStatus"].ToString(),
+                                    completionDate = reader.IsDBNull(reader.GetOrdinal("completionDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["completionDate"]),
+                                    repairParts = reader["repairParts"].ToString(),
+                                    masterID = reader.IsDBNull(reader.GetOrdinal("masterID")) ? (int?)null : Convert.ToInt32(reader["masterID"]),
+                                    clientID = Convert.ToInt32(reader["clientID"])
                                 };
 
                                 requests.Add(request);
@@ -747,16 +793,16 @@ namespace CURSACH
                             {
                                 var request = new Request
                                 {
-                                    requestID = reader.GetInt32(0),
-                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
-                                    homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
-                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
-                                    repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
-                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
-                                    clientID = reader.GetInt32(9)
+                                    requestID = Convert.ToInt32(reader["requestID"]),
+                                    startDate = reader.IsDBNull(reader.GetOrdinal("startDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["startDate"]),
+                                    homeTechType = reader["homeTechType"].ToString(),
+                                    homeTechModel = reader["homeTechModel"].ToString(),
+                                    problemDescryption = reader["problemDescryption"].ToString(),
+                                    requestStatus = reader["requestStatus"].ToString(),
+                                    completionDate = reader.IsDBNull(reader.GetOrdinal("completionDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["completionDate"]),
+                                    repairParts = reader["repairParts"].ToString(),
+                                    masterID = reader.IsDBNull(reader.GetOrdinal("masterID")) ? (int?)null : Convert.ToInt32(reader["masterID"]),
+                                    clientID = Convert.ToInt32(reader["clientID"])
                                 };
 
                                 requests.Add(request);
@@ -798,16 +844,16 @@ namespace CURSACH
                             {
                                 var request = new Request
                                 {
-                                    requestID = reader.GetInt32(0),
-                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
-                                    homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
-                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
-                                    repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
-                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
-                                    clientID = reader.GetInt32(9)
+                                    requestID = Convert.ToInt32(reader["requestID"]),
+                                    startDate = reader.IsDBNull(reader.GetOrdinal("startDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["startDate"]),
+                                    homeTechType = reader["homeTechType"].ToString(),
+                                    homeTechModel = reader["homeTechModel"].ToString(),
+                                    problemDescryption = reader["problemDescryption"].ToString(),
+                                    requestStatus = reader["requestStatus"].ToString(),
+                                    completionDate = reader.IsDBNull(reader.GetOrdinal("completionDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["completionDate"]),
+                                    repairParts = reader["repairParts"].ToString(),
+                                    masterID = reader.IsDBNull(reader.GetOrdinal("masterID")) ? (int?)null : Convert.ToInt32(reader["masterID"]),
+                                    clientID = Convert.ToInt32(reader["clientID"])
                                 };
 
                                 requests.Add(request);
@@ -850,16 +896,16 @@ namespace CURSACH
                             {
                                 var request = new Request
                                 {
-                                    requestID = reader.GetInt32(0),
-                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
-                                    homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
-                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
-                                    repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
-                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
-                                    clientID = reader.GetInt32(9)
+                                    requestID = Convert.ToInt32(reader["requestID"]),
+                                    startDate = reader.IsDBNull(reader.GetOrdinal("startDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["startDate"]),
+                                    homeTechType = reader["homeTechType"].ToString(),
+                                    homeTechModel = reader["homeTechModel"].ToString(),
+                                    problemDescryption = reader["problemDescryption"].ToString(),
+                                    requestStatus = reader["requestStatus"].ToString(),
+                                    completionDate = reader.IsDBNull(reader.GetOrdinal("completionDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["completionDate"]),
+                                    repairParts = reader["repairParts"].ToString(),
+                                    masterID = reader.IsDBNull(reader.GetOrdinal("masterID")) ? (int?)null : Convert.ToInt32(reader["masterID"]),
+                                    clientID = Convert.ToInt32(reader["clientID"])
                                 };
 
                                 requests.Add(request);
@@ -901,16 +947,16 @@ namespace CURSACH
                             {
                                 var request = new Request
                                 {
-                                    requestID = reader.GetInt32(0),
-                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
-                                    homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
-                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
-                                    repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
-                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
-                                    clientID = reader.GetInt32(9)
+                                    requestID = Convert.ToInt32(reader["requestID"]),
+                                    startDate = reader.IsDBNull(reader.GetOrdinal("startDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["startDate"]),
+                                    homeTechType = reader["homeTechType"].ToString(),
+                                    homeTechModel = reader["homeTechModel"].ToString(),
+                                    problemDescryption = reader["problemDescryption"].ToString(),
+                                    requestStatus = reader["requestStatus"].ToString(),
+                                    completionDate = reader.IsDBNull(reader.GetOrdinal("completionDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["completionDate"]),
+                                    repairParts = reader["repairParts"].ToString(),
+                                    masterID = reader.IsDBNull(reader.GetOrdinal("masterID")) ? (int?)null : Convert.ToInt32(reader["masterID"]),
+                                    clientID = Convert.ToInt32(reader["clientID"])
                                 };
 
                                 requests.Add(request);
@@ -952,16 +998,16 @@ namespace CURSACH
                             {
                                 var request = new Request
                                 {
-                                    requestID = reader.GetInt32(0),
-                                    startDate = (DateTime)(reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1)),
-                                    homeTechType = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                    homeTechModel = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                    problemDescryption = reader.IsDBNull(4) ? null : reader.GetString(4),
-                                    requestStatus = reader.IsDBNull(5) ? null : reader.GetString(5),
-                                    completionDate = (DateTime)(reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6)),
-                                    repairParts = reader.IsDBNull(7) ? null : reader.GetString(7),
-                                    masterID = reader.IsDBNull(8) ? (int?)null : reader.GetInt32(8),
-                                    clientID = reader.GetInt32(9)
+                                    requestID = Convert.ToInt32(reader["requestID"]),
+                                    startDate = reader.IsDBNull(reader.GetOrdinal("startDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["startDate"]),
+                                    homeTechType = reader["homeTechType"].ToString(),
+                                    homeTechModel = reader["homeTechModel"].ToString(),
+                                    problemDescryption = reader["problemDescryption"].ToString(),
+                                    requestStatus = reader["requestStatus"].ToString(),
+                                    completionDate = reader.IsDBNull(reader.GetOrdinal("completionDate")) ? DateTime.MinValue : Convert.ToDateTime(reader["completionDate"]),
+                                    repairParts = reader["repairParts"].ToString(),
+                                    masterID = reader.IsDBNull(reader.GetOrdinal("masterID")) ? (int?)null : Convert.ToInt32(reader["masterID"]),
+                                    clientID = Convert.ToInt32(reader["clientID"])
                                 };
 
                                 requests.Add(request);

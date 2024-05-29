@@ -15,7 +15,7 @@
     <Window.Resources>
         <Style TargetType="ScrollViewer" x:Key="CustomScrollViewerStyle">
             <Setter Property="Background" Value="Transparent"/>
-            
+
         </Style>
     </Window.Resources>
 

@@ -89,6 +89,8 @@ namespace CURSACH.View
                 dpEndDate.IsEnabled = false;
                 dpStartDate.IsEnabled = false;
                 cbMaster.IsEnabled = false;
+                cbStatus.IsEnabled = false;
+
 
             }
             else if (CurrentUser.type == "Мастер")
@@ -111,6 +113,7 @@ namespace CURSACH.View
                 dpEndDate.IsEnabled = false;
                 dpStartDate.IsEnabled = false;
                 cbMaster.IsEnabled = true;
+                cbStatus.IsEnabled = false;
 
             }
         }
@@ -177,6 +180,7 @@ namespace CURSACH.View
             Close();
         }
 
+        btnAddComment_Click
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string description = Description.Text;

@@ -316,7 +316,7 @@
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Left"/>
 
-                                <TextBlock Text="Роль:" Name="UserType"
+                                <TextBlock Text="Роль:" 
                                     Margin="0,20,0,0"
                                          TextAlignment="Left"
                                          FontWeight="Bold"
@@ -327,7 +327,7 @@
                                         FontFamily="Montserrat"
                                         VerticalAlignment="Center"/>
 
-                                <TextBlock Name="UserRole" Text="role"
+                                <TextBlock Name="UserType" Text="role"
                                     TextAlignment="Left"
                                     Foreground="Black"
                                     HorizontalAlignment="Left"

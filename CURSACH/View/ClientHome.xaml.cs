@@ -74,7 +74,7 @@ namespace CURSACH.View
         private void LoadInProcessRequests()
         {
             List<Request> requests = DatabaseManager.GetInProcessRequestsByClient();
-            WaitingRequests.Children.Clear();
+            InPocessRequests.Children.Clear();
 
             foreach (Request request in requests)
             {
@@ -155,7 +155,7 @@ namespace CURSACH.View
         private void LoadDoneRequests()
         {
             List<Request> requests = DatabaseManager.GetDoneRequestsByClient();
-            WaitingRequests.Children.Clear();
+            DoneRequests.Children.Clear();
 
 
             foreach (Request request in requests)

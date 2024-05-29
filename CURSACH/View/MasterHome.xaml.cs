@@ -59,9 +59,6 @@ namespace CURSACH.View
 
         }
 
-
-        
-
         private void btnProfile_Click(object sender, RoutedEventArgs e)
         {
             ProfileMain profile = new ProfileMain();
@@ -76,7 +73,7 @@ namespace CURSACH.View
         private void LoadInProcessRequests()
         {
             List<Request> requests = DatabaseManager.GetInProcessRequestsByMaster();
-            WaitingRequests.Children.Clear();
+            InPocessRequests.Children.Clear();
 
             foreach (Request request in requests)
             {
@@ -157,7 +154,7 @@ namespace CURSACH.View
         private void LoadDoneRequests()
         {
             List<Request> requests = DatabaseManager.GetDoneRequestsByMaster();
-            WaitingRequests.Children.Clear();
+            DoneRequests.Children.Clear();
 
 
             foreach (Request request in requests)

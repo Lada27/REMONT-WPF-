@@ -73,7 +73,7 @@ namespace CURSACH.View
                 CurrentUser.password = user.password;
                 CurrentUser.type = user.type;
 
-                if (user.type == "Заказчик" || user.type == "Mастер")
+                if (user.type == "Заказчик" || user.type == "Мастер")
                 {
                     ProfileMain profile = new ProfileMain();
                     profile.Show();
