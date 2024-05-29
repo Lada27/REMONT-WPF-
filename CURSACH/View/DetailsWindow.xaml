@@ -349,8 +349,7 @@
                                                     Grid.Column="0"/>
 
                                                     <DatePicker Name="dpStartDate" 
-                                                        SelectedDateChanged="DatePicker_SelectedStartDateChanged"
-                                                        IsDropDownOpen="True" 
+                                                        IsDropDownOpen="False" 
                                                         SelectedDateFormat="Short"
                                                         Margin="10,2"
                                                         FontSize="19"

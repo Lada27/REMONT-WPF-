@@ -62,17 +62,18 @@ namespace CURSACH.View
             String email = txtUser.Text;
             String password = txtPass.Password;
             Int32 UserId = DatabaseManager.AuthenticateUser(email, password);
+            CurrentUser.userId = UserId;
             if (UserId >= 0) 
             {
                 User user = DatabaseManager.GetUserById(UserId);
                 CurrentUser.fio = user.fio;
-                CurrentUser.userId = user.userID;
+                
                 CurrentUser.phone = user.phone;
                 CurrentUser.login = user.login;
                 CurrentUser.password = user.password;
                 CurrentUser.type = user.type;
 
-                if (user.type == "Клиент" || user.type == "Mастер")
+                if (user.type == "Заказчик" || user.type == "Mастер")
                 {
                     ProfileMain profile = new ProfileMain();
                     profile.Show();
@@ -80,14 +81,13 @@ namespace CURSACH.View
                 }
                 else
                 {
-                    if (user.type == "Клиент" || user.type == "Mастер")
+                    if (user.type == "Менеджер" || user.type == "Оператор")
                     {
                         ProfileVip profile = new ProfileVip();
                         profile.Show();
                         this.Hide();
                     }
                 }
-
             }
             else
             {

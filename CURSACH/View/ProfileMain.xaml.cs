@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CURSACH.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,35 @@ namespace CURSACH.View
         {
             InitializeComponent();
             LoadNotifications();
+            MessageBox.Show("Id текущего пользователя - " + CurrentUser.userId.ToString());
+        }
+
+        // Rнопки упраавления всего окна
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void btnMaximaze_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+                CurrentWindow.State = WindowState.Normal;
+
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+                CurrentWindow.State = WindowState.Maximized;
+
+            }
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+
         }
 
         private void LoadNotifications()
@@ -35,7 +65,7 @@ namespace CURSACH.View
          
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentUser.type == "Клиент")
+            if (CurrentUser.type == "Заказчик")
             {
                 ClientHome home = new ClientHome();
                 home.Show();

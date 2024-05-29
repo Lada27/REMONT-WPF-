@@ -26,11 +26,15 @@ namespace CURSACH.View
         {
 
             InitializeComponent();
+            MessageBox.Show("Id текущего пользователя - " + CurrentUser.userId.ToString());
+
             WindowState = CurrentWindow.State;
             UserName.Text = CurrentUser.fio.Trim();
             UserEmail.Text = CurrentUser.login.Trim();
             UserPassword.Text = CurrentUser.password.Trim();
             UserPhone.Text = CurrentUser.phone.Trim();
+            UserType.Text = CurrentUser.type.Trim();
+
 
             if (CurrentUser.type == "Оператор")
             {

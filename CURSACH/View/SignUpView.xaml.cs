@@ -89,7 +89,7 @@ namespace CURSACH.View
 
 
             // Регистрация пользователя
-            bool success = DatabaseManager.AddUser(name, phone, email, password, "Клиент");
+            bool success = DatabaseManager.AddUser(name, phone, email, password, "Заказчик");
 
             if (success)
             {

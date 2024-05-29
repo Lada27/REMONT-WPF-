@@ -20,12 +20,12 @@ namespace CURSACH.View
     /// </summary>
     public partial class Team : Window
     {
-        int SelectedUserId = CurrentUser.UserId;
+        int SelectedUserId = CurrentUser.userId;
         public Team()
         {
             InitializeComponent();
             WindowState = CurrentWindow.State;
-            loadAllUsers();
+            loadAllMasters();
             LoadUserInfoById(SelectedUserId);
 
             if (CurrentWindow.State == WindowState.Maximized)
@@ -44,18 +44,15 @@ namespace CURSACH.View
 
         }
 
-       
-
-        private void loadAllUsers()
+        private void loadAllMasters()
         {
+            List<User> masters = DatabaseManager.GetAllMasters();
+            spAllMaster.Children.Clear();
 
-            List<Users> users = DatabaseManager.LoadAllUsers();
-            spAllUsers.Children.Clear();
-
-            foreach (Users user in users)
+            foreach (User master in masters)
             {
                 Style buttonStyle = new Style(typeof(Button));
-                if (user.Id == SelectedUserId)
+                if (master.userID == SelectedUserId)
                 {
                     buttonStyle.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFC97F"))));
                 }
@@ -86,73 +83,31 @@ namespace CURSACH.View
                 buttonStyle.Setters.Add(cornerRadiusSetter);
 
                 Button btnUser = new Button();
-                btnUser.Content = user.Name;
+                btnUser.Content = master.fio;
                 btnUser.Style = buttonStyle;
-                btnUser.Click += (sender, e) => LoadUserInfoById(user.Id);
-                spAllUsers.Children.Add(btnUser);
+                btnUser.Click += (sender, e) => LoadUserInfoById(master.userID);
+                spAllMaster.Children.Add(btnUser);
             }
         }
 
         private void LoadUserInfoById(int UserId)
         {
             SelectedUserId = UserId;
-            loadAllUsers();
-            Users user = DatabaseManager.GetUserById(UserId);
-            FirstLetterOfTheName.Text = Convert.ToString(user.Name[0]);
+            loadAllMasters();
+            User user = DatabaseManager.GetUserById(UserId);
+            FirstLetterOfTheName.Text = Convert.ToString(user.fio[0]);
 
-            UserName.Text = user.Name;
-            UserEmail.Text = user.Email;
-            UserPhone.Text = user.Phone;
+            UserName.Text = user.fio;
+            UserEmail.Text = user.login;
+            UserPhone.Text = user.phone;
 
-            List<Tasks> tasks = DatabaseManager.GetAllTasksByUser(UserId);
-            spUserTasks.Children.Clear();
-
-            foreach (Tasks task in tasks)
-            {
-                Style buttonStyle = new Style(typeof(Button));
-                buttonStyle.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2CAE5"))));
-                buttonStyle.Setters.Add(new Setter(Button.ForegroundProperty, Brushes.Black));
-                buttonStyle.Setters.Add(new Setter(Button.FontSizeProperty, 14.0));
-                buttonStyle.Setters.Add(new Setter(Button.MarginProperty, new Thickness(5, 10, 5, 0)));
-                buttonStyle.Setters.Add(new Setter(Border.BorderThicknessProperty, new Thickness(0)));
-                buttonStyle.Setters.Add(new Setter(FrameworkElement.MinWidthProperty, 90.0)); // Устанавливаем минимальную ширину в 100
-                buttonStyle.Setters.Add(new Setter(FrameworkElement.MinHeightProperty, 40.0)); // Устанавливаем минимальную высоту в 50
-
-
-                // Добавление Setter в стиль кнопок
-                buttonStyle.Setters.Add(new Setter(TextBlock.TextWrappingProperty, TextWrapping.Wrap));
-
-
-                // Создание объекта Border для задания радиуса скругления углов
-                CornerRadius cornerRadius = new CornerRadius(30); // Устанавливаем радиус скругления углов
-
-                // Создание объекта Setter для установки свойства CornerRadius
-                Setter cornerRadiusSetter = new Setter(Border.CornerRadiusProperty, cornerRadius);
-
-                // Добавление Setter в стиль кнопок
-                buttonStyle.Setters.Add(cornerRadiusSetter);
-
-                Button btnTask = new Button();
-                btnTask.Content = task.Description;
-                btnTask.Style = buttonStyle;
-                btnTask.Click += (sender, e) => OpenTaskDetails(task);
-                spUserTasks.Children.Add(btnTask);
-            }
+            CurrentRequests.Text = DatabaseManager.GetCurrentRequestsByMasterId(user.userID).ToString();
+            DoneRequests.Text = DatabaseManager.GetDoneRequestsByMasterId(user.userID).ToString();
+            MidTme.Text = DatabaseManager.GetMidTimeByMasterId(user.userID).ToString();
         }
 
 
-        private void OpenTaskDetails(Tasks task)
-        {
-            // Создаем новое окно с подробной информацией о задаче
-            DetailsWindow taskDetailsWindow = new DetailsWindow(task);
-            taskDetailsWindow.ShowDialog(); // Отображаем окно как модальное
-
-            loadAllUsers();
-            LoadUserInfoById(SelectedUserId);
-        }
-
-
-
+       
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -197,19 +152,7 @@ namespace CURSACH.View
 
         }
 
-        private void btnTeam_Click(object sender, RoutedEventArgs e)
-        {
-            Team team = new Team();
-            team.Show();
-            this.Hide();
-        }
-
-        private void btnProjects_Click(object sender, RoutedEventArgs e)
-        {
-            Projects projects = new Projects();
-            projects.Show();
-            this.Hide();
-        }
+        
 
         private void btnProfile_Click(object sender, RoutedEventArgs e)
         {
@@ -220,71 +163,10 @@ namespace CURSACH.View
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            ClientHome home = new ClientHome(CurrentUser.UserId);
+            ManagerHome home = new ManagerHome();
             home.Show();
             this.Hide();
         }
-
-        private void btnFilter_Click(object sender, RoutedEventArgs e)
-        {
-            FilterWindow filterWindow = new FilterWindow(SelectedUserId);
-            filterWindow.ShowDialog();
-
-            int selectedProjectId = DatabaseManager.GtProjectIdByName(filterWindow.SelectedProject);
-            int selectedUser = DatabaseManager.GetUserIdByName(filterWindow.SelectedUser);
-            string selectedStatus = filterWindow.SelectedStatus;
-            string selectedPriority = filterWindow.SelectedPriority;
-            int daysUntilDeadline = filterWindow.DaysUntilDeadline;
-
-            List<Tasks> tasks = DatabaseManager.GetFilteredTasks(selectedProjectId, selectedUser, selectedStatus, selectedPriority, daysUntilDeadline);
-            spUserTasks.Children.Clear();
-
-            foreach (Tasks task in tasks)
-            {
-                Style buttonStyle = new Style(typeof(Button));
-
-                buttonStyle.Setters.Add(new Setter(Button.BackgroundProperty, new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2CAE5"))));
-
-
-                buttonStyle.Setters.Add(new Setter(Button.ForegroundProperty, Brushes.Black));
-                buttonStyle.Setters.Add(new Setter(Button.FontSizeProperty, 14.0));
-                buttonStyle.Setters.Add(new Setter(Button.MarginProperty, new Thickness(5, 10, 5, 0)));
-                buttonStyle.Setters.Add(new Setter(Border.BorderThicknessProperty, new Thickness(0)));
-                buttonStyle.Setters.Add(new Setter(FrameworkElement.MinWidthProperty, 90.0)); // Устанавливаем минимальную ширину в 100
-                buttonStyle.Setters.Add(new Setter(FrameworkElement.MinHeightProperty, 40.0)); // Устанавливаем минимальную высоту в 50
-
-
-                // Добавление Setter в стиль кнопок
-                buttonStyle.Setters.Add(new Setter(TextBlock.TextWrappingProperty, TextWrapping.Wrap));
-
-
-                // Создание объекта Border для задания радиуса скругления углов
-                CornerRadius cornerRadius = new CornerRadius(30); // Устанавливаем радиус скругления углов
-
-                // Создание объекта Setter для установки свойства CornerRadius
-                Setter cornerRadiusSetter = new Setter(Border.CornerRadiusProperty, cornerRadius);
-
-                // Добавление Setter в стиль кнопок
-                buttonStyle.Setters.Add(cornerRadiusSetter);
-
-
-                Button btnTask = new Button();
-                btnTask.Content = task.Description;
-                btnTask.Style = buttonStyle;
-                btnTask.Click += (se, ee) => OpenTaskDetails(task);
-                spUserTasks.Children.Add(btnTask);
-            }
-        }
-
-
-            private void btnAddTaskByUser_Click(object sender, RoutedEventArgs e)
-            {
-                DetailsWindow taskDetailsWindow = new DetailsWindow();
-                taskDetailsWindow.ShowDialog(); // Отображаем окно как модальное
-                
-            }
-
-       
     }
     
     

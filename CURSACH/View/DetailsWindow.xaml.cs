@@ -80,7 +80,7 @@ namespace CURSACH.View
 
             Phone.Text = DatabaseManager.GetUserById(request.clientID).phone;
 
-            if (CurrentUser.type == "Клиент")
+            if (CurrentUser.type == "Заказчик")
             {
                 btnSave.Visibility = Visibility.Collapsed;
                 Description.IsReadOnly = true;

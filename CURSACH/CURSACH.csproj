@@ -181,14 +181,17 @@
     <Compile Include="Classes\DatabaseHelper.cs" />
     <Compile Include="Classes\Notification.cs" />
     <Compile Include="Classes\Request.cs" />
-    <Compile Include="View\AddProjectWindow.xaml.cs">
-      <DependentUpon>AddProjectWindow.xaml</DependentUpon>
+    <Compile Include="View\AddRequestCart.xaml.cs">
+      <DependentUpon>AddRequestCart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FilterWindow.xaml.cs">
-      <DependentUpon>FilterWindow.xaml</DependentUpon>
+    <Compile Include="View\ManagerHome.xaml.cs">
+      <DependentUpon>ManagerHome.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MasterHome.xaml.cs">
       <DependentUpon>MasterHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OperHome.xaml.cs">
+      <DependentUpon>OperHome.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProfileMain.xaml.cs">
       <DependentUpon>ProfileMain.xaml</DependentUpon>
@@ -196,19 +199,13 @@
     <Compile Include="View\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\StatusFilterWindow.xaml.cs">
-      <DependentUpon>StatusFilterWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Classes\CurrentUser.cs" />
     <Compile Include="Classes\DatabaseManager.cs" />
     <Compile Include="Classes\ProjectsClass.cs" />
     <Compile Include="Classes\Tasks.cs" />
-    <Compile Include="View\UrgentTasksFilter.xaml.cs">
-      <DependentUpon>UrgentTasksFilter.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Classes\User.cs" />
-    <Compile Include="View\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
+    <Compile Include="View\ClientHome.xaml.cs">
+      <DependentUpon>ClientHome.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -216,11 +213,8 @@
     <Compile Include="View\ProfileVip.xaml.cs">
       <DependentUpon>ProfileVip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Projects.xaml.cs">
-      <DependentUpon>Projects.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TaskDetailsWindow.xaml.cs">
-      <DependentUpon>TaskDetailsWindow.xaml</DependentUpon>
+    <Compile Include="View\DetailsWindow.xaml.cs">
+      <DependentUpon>DetailsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Team.xaml.cs">
       <DependentUpon>Team.xaml</DependentUpon>
@@ -237,15 +231,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AddProjectWindow.xaml">
+    <Page Include="View\AddRequestCart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FilterWindow.xaml">
+    <Page Include="View\ManagerHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MasterHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OperHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -257,15 +255,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\StatusFilterWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UrgentTasksFilter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Home.xaml">
+    <Page Include="View\ClientHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -277,11 +267,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Projects.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TaskDetailsWindow.xaml">
+    <Page Include="View\DetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

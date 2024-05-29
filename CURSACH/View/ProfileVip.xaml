@@ -316,7 +316,7 @@
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Left"/>
 
-                                <TextBlock Text="Роль:"
+                                <TextBlock Text="Роль:" Name="UserType"
                                     Margin="0,20,0,0"
                                          TextAlignment="Left"
                                          FontWeight="Bold"

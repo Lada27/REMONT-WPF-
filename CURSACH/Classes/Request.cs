@@ -19,9 +19,5 @@ namespace CURSACH.Classes
         public int? masterID; // Может быть null
         public int clientID;
 
-        public static implicit operator Request(Request v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
