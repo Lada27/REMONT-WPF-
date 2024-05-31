@@ -26,7 +26,6 @@ namespace CURSACH.View
         {
 
             InitializeComponent();
-            MessageBox.Show("Id текущего пользователя - " + CurrentUser.userId.ToString());
 
             WindowState = CurrentWindow.State;
             UserName.Text = CurrentUser.fio.Trim();

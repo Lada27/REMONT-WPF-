@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CURSACH.View"
+
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
@@ -11,7 +12,7 @@
         WindowStyle="None"
     
     Title="Profile" Height="400" Width="533">
-
+  
     <Border CornerRadius="30"
      Background="#5B41A3"
      BorderBrush="#7C65B5"
@@ -420,13 +421,13 @@
                                 <DataGrid x:Name="NotificationsDataGrid"
                                       AutoGenerateColumns="False"
                                       CanUserAddRows="False"
-                                      ItemsSource="{Binding Notifications}"
-                                      Margin="10">
+                                          Margin="10"
+                                      >
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Сообщение" Binding="{Binding Message}" Width="*"/>
-                                        <DataGridTextColumn Header="Дата добавления" Binding="{Binding AdditionDate}" Width="*"/>
-                                        <DataGridCheckBoxColumn Header="Просмотрено" Binding="{Binding IsWatched}" Width="*"/>
-                                        <DataGridTextColumn Header="Номер заявки" Binding="{Binding RequestID}" Width="*"/>
+                                        <DataGridTextColumn Header="Сообщение" Binding="{Binding message}" Width="*"/>
+                                        <DataGridTextColumn Header="Дата добавления" Binding="{Binding additionDate}" Width="*"/>
+                                        <DataGridCheckBoxColumn Header="Просмотрено" Binding="{Binding isWatched}" Width="*"/>
+                                        <DataGridTextColumn Header="Номер заявки" Binding="{Binding requestID}" Width="*"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
 

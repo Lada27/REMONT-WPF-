@@ -18,6 +18,65 @@ namespace CURSACH
     internal class DatabaseManager
     {
         private const string ConnectionString = "Data Source=TecServis.db;Version=3;";
+        public static bool AddNotification(int userId, int requestId, string message)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    string query = @"
+                        INSERT INTO Notifications (userID, requestID, message, additionDate, isWatched)
+                        VALUES (@userID, @requestID, @message, @additionDate, 0)";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@userID", userId);
+                        command.Parameters.AddWithValue("@requestID", requestId);
+                        command.Parameters.AddWithValue("@message", message);
+                        command.Parameters.AddWithValue("@additionDate", DateTime.Now);
+
+                        int result = command.ExecuteNonQuery();
+                        return result > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding notification: {ex.Message}");
+                return false;
+            }
+        }
+        public static bool AddComment(int requestId, string commentText)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    string query = @"
+                INSERT INTO Comments (requestID, message)
+                VALUES (@requestId, @message)";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@requestId", requestId);
+                        command.Parameters.AddWithValue("@message", commentText);
+
+                        int result = command.ExecuteNonQuery();
+                        return result > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Здесь можно добавить логирование ошибки
+                Console.WriteLine($"Error adding comment: {ex.Message}");
+                return false;
+            }
+        }
 
         public static int GetMidTimeOfDoneRequestsByType(string type)
         {

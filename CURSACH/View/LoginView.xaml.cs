@@ -91,9 +91,9 @@ namespace CURSACH.View
             }
             else
             {
-                MessageBox.Show("Пользователь не найден");
+                MessageBox.Show("Пользователь не найден", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
         }
 
         private void btnSignUp_Click(object sender, RoutedEventArgs e)

@@ -180,16 +180,19 @@ namespace CURSACH.View
             Close();
         }
 
-        btnAddComment_Click
+
+
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string description = Description.Text;
-            DateTime endDate = dpEndDate.SelectedDate ?? DateTime.Now; // Получаем выбранную дату или текущую дату
-            string status = ((ComboBoxItem)cbStatus.SelectedItem)?.Content.ToString(); // Получаем выбранный статус из ComboBox
+            DateTime endDate = dpEndDate.SelectedDate ?? DateTime.Now;
+            string status = ((ComboBoxItem)cbStatus.SelectedItem)?.Content.ToString();
             int masterId = ((ComboBoxItem)cbMaster.SelectedItem)?.Tag as int? ?? -1;
             string model = tbModel.Text;
             string repairDetails = RepairDetails.Text;
 
+            bool statusChanged = Request.requestStatus != status;
 
             Request.problemDescryption = description;
             Request.completionDate = endDate;
@@ -197,21 +200,24 @@ namespace CURSACH.View
             Request.masterID = masterId;
             Request.homeTechModel = model;
             Request.repairParts = repairDetails;
-            
 
-                // Проверка, действительно ли пользователь хочет изменить заявку
-                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите изменить заявку?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите изменить заявку?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                DatabaseManager.UpdateRequest(Request);
+                MessageBox.Show("Заявка успешно изменена.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                if (statusChanged)
                 {
-                    // Выполнение SQL-запроса для обновления данных в базе данных
-                    DatabaseManager.UpdateRequest(Request); // Передаем обновленный объект задачи
-                    MessageBox.Show("Заявка успешно изменена.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    string notificationMessage = $"Статус вашей заявки №{Request.requestID} был изменен на {status}";
+                    DatabaseManager.AddNotification(Request.clientID, Request.requestID, notificationMessage);
                 }
-          
+                Close();
 
+            }
         }
 
-        
+
         private void DatePicker_SelectedEndDateChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is DatePicker datePicker && datePicker.SelectedDate.HasValue)
@@ -221,5 +227,32 @@ namespace CURSACH.View
 
             }
         }
+        private void btnAddComment_Click(object sender, RoutedEventArgs e)
+        {
+            string commentText = CommentText.Text;
+
+            // Проверка на пустое поле
+            if (string.IsNullOrWhiteSpace(commentText))
+            {
+                MessageBox.Show("Пожалуйста, введите комментарий.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            
+            // Добавление комментария в базу данных
+            bool success = DatabaseManager.AddComment(Request.requestID, commentText);
+
+            if (success)
+            {
+                MessageBox.Show("Комментарий успешно добавлен.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                CommentText.Text = string.Empty; // Очистка текстового поля после добавления комментария
+                LoadComments(Request.requestID); // Перезагрузка комментариев, если у вас есть метод для этого
+            }
+            else
+            {
+                MessageBox.Show("Ошибка при добавлении комментария. Попробуйте снова.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
     }
 }

@@ -24,7 +24,6 @@ namespace CURSACH.View
         {
             InitializeComponent();
             LoadNotifications();
-            MessageBox.Show("Id текущего пользователя - " + CurrentUser.userId.ToString());
             WindowState = CurrentWindow.State;
             UserName.Text = CurrentUser.fio.Trim();
             UserEmail.Text = CurrentUser.login.Trim();
@@ -68,7 +67,8 @@ namespace CURSACH.View
             NotificationsDataGrid.ItemsSource = notifications;
         }
 
-         
+       
+
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentUser.type == "Заказчик")
