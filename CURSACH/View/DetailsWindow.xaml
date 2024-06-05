@@ -123,7 +123,7 @@
                                 </Button.Template>
                             </Button>
 
-                            <ScrollViewer Grid.Column="1">
+                            <ScrollViewer Grid.Column="1" Margin="5,5,0,0">
                                 <TextBox x:Name="Description" Text="Описание"
                                      Foreground="#160C31"
                                      FontSize="25"
@@ -226,9 +226,10 @@
                                             BorderBrush="#D2CAE5"
                                             BorderThickness="2"
                                             Margin="0,0,0,0"
-                                            Height="35">
+                                            Height="45">
 
                                                 <ComboBox Name="cbStatus"
+                                                          Margin="5"
                                                   SelectedIndex="0" 
                                                   Foreground="#160C31"
                                                   Background="Transparent"
@@ -238,7 +239,7 @@
                                                   VerticalAlignment="Center"
                                                   BorderThickness="0"
                                                   IsEditable="False" 
-                                                  Margin="2" BorderBrush="Transparent"
+                                                  BorderBrush="Transparent"
           >
                                                     <ComboBoxItem Content="Новая заявка" Style="{StaticResource CustomComboBoxStyle}"/>
                                                     <ComboBoxItem Content="В процессе ремонта" Style="{StaticResource CustomComboBoxStyle}"/>
@@ -288,7 +289,7 @@
                                             BorderBrush="#D2CAE5"
                                             BorderThickness="2"
                                             Margin="0,0,0,10"
-                                            Height="35">
+                                            Height="45">
 
                                                 <ComboBox Name="cbMaster" 
                                                   
@@ -301,7 +302,7 @@
                                                   VerticalAlignment="Center"
                                                   BorderThickness="0"
                                                   IsEditable="False" 
-                                                  Margin="2" BorderBrush="Transparent"
+                                                  Margin="5" BorderBrush="Transparent"
                                                   >
 
                                                 </ComboBox>
@@ -535,7 +536,7 @@
                                             Margin="0,0,0,10"
                                            >
 
-                                            <ScrollViewer>
+                                            <ScrollViewer Margin="5,5,0,5">
                                                 <StackPanel x:Name="CommentsPanel" />
                                             </ScrollViewer>
 

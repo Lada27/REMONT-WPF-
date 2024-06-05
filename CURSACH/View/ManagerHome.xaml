@@ -17,6 +17,7 @@
      BorderBrush="#7C65B5"
      BorderThickness="4">
 
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -336,6 +337,7 @@
                                         TextWrapping="Wrap "
                                         Grid.Column="3"/>
                             <TextBlock  Name="MidTime"
+                                        Text="3"
                                          Foreground="#160C31"
                                          FontSize="16"
                                          FontWeight="Bold"
@@ -450,7 +452,7 @@
             VerticalAlignment="Center"
             TextWrapping="Wrap "
             Grid.Column="3"/>
-                            <TextBlock  Name="MidTimeOfFiltered" 
+                            <TextBlock  Name="MidTimeOfFiltered" Text="4"
              Foreground="#160C31"
              FontSize="16"
              FontWeight="Bold"

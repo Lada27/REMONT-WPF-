@@ -89,7 +89,7 @@ namespace CURSACH
                     connection.Open();
 
                     string query = @"
-                SELECT AVG(completionDate - startDate)
+                SELECT AVG(julianday(completionDate) - julianday(startDate))
                 FROM Requests
                 WHERE requestStatus = 'Готова к выдаче'
                 AND homeTechType = @type";

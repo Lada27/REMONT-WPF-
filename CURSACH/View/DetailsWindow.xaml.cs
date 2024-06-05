@@ -39,11 +39,19 @@ namespace CURSACH.View
             // Отображаем дату в текстовом формате
             dpStartDate.Text = request.startDate.ToString("dd.MM.yyyy");
 
-            tbSelectedEndDate.Text = request.completionDate.ToString("dd.MM.yyyy");
-            // Устанавливаем значение DatePicker 
-            dpEndDate.SelectedDate = request.completionDate;
-            // Отображаем дату в текстовом формате
-            dpEndDate.Text = request.completionDate.ToString("dd.MM.yyyy");
+            
+            if  (request.requestStatus == "В процессе выполнения" || request.requestStatus == "Новая заявка")
+            {
+                tbSelectedEndDate.Text = "Не закончено";
+            }
+            else
+            {
+                tbSelectedEndDate.Text = request.completionDate?.ToString("dd.MM.yyyy");
+                // Устанавливаем значение DatePicker 
+                dpEndDate.SelectedDate = request.completionDate;
+                // Отображаем дату в текстовом формате
+                dpEndDate.Text = request.completionDate?.ToString("dd.MM.yyyy");
+            }
 
 
             // Устанавливаем значение ComboBox cbStatus
@@ -90,8 +98,8 @@ namespace CURSACH.View
                 dpStartDate.IsEnabled = false;
                 cbMaster.IsEnabled = false;
                 cbStatus.IsEnabled = false;
-
-
+                btnAddComment.Visibility = Visibility.Collapsed;
+                CommentText.Visibility = Visibility.Collapsed;
             }
             else if (CurrentUser.type == "Мастер")
             {
@@ -114,6 +122,8 @@ namespace CURSACH.View
                 dpStartDate.IsEnabled = false;
                 cbMaster.IsEnabled = true;
                 cbStatus.IsEnabled = false;
+                btnAddComment.Visibility = Visibility.Collapsed;
+                CommentText.Visibility = Visibility.Collapsed;
 
             }
         }
@@ -204,14 +214,23 @@ namespace CURSACH.View
             MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите изменить заявку?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                DatabaseManager.UpdateRequest(Request);
-                MessageBox.Show("Заявка успешно изменена.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+               
 
                 if (statusChanged)
                 {
                     string notificationMessage = $"Статус вашей заявки №{Request.requestID} был изменен на {status}";
                     DatabaseManager.AddNotification(Request.clientID, Request.requestID, notificationMessage);
+                    if (status == "Готова к выдаче")
+                    {
+                        Request.completionDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        Request.completionDate = null;
+                    }
                 }
+                DatabaseManager.UpdateRequest(Request);
+                MessageBox.Show("Заявка успешно изменена.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
 
             }

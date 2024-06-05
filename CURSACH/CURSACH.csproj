@@ -201,8 +201,6 @@
     </Compile>
     <Compile Include="Classes\CurrentUser.cs" />
     <Compile Include="Classes\DatabaseManager.cs" />
-    <Compile Include="Classes\ProjectsClass.cs" />
-    <Compile Include="Classes\Tasks.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="View\ClientHome.xaml.cs">
       <DependentUpon>ClientHome.xaml</DependentUpon>

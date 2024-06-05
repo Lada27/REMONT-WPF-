@@ -24,7 +24,7 @@ namespace CURSACH.View
         {
             InitializeComponent();
             NumberOfRequests.Text = DatabaseManager.GetNumberOfDoneRequests().ToString();
-            MidTime.Text = DatabaseManager.GetMidTime().ToString();
+           // MidTime.Text = DatabaseManager.GetMidTime().ToString();
 
         }
         // Rнопки упраавления всего окна

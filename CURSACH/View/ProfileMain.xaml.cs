@@ -62,12 +62,37 @@ namespace CURSACH.View
 
         private void LoadNotifications()
         {
-            
+            // Очистка панели перед добавлением новых уведомлений
+            NotificationsPanel.Children.Clear();
+
+            // Получение уведомлений
             var notifications = DatabaseManager.GetUserNotifications();
-            NotificationsDataGrid.ItemsSource = notifications;
+
+            // Добавление каждого уведомления в панель
+            foreach (var notification in notifications)
+            {
+                var border = new Border
+                {
+                    BorderBrush = Brushes.LightGray,
+                    BorderThickness = new Thickness(1),
+                    Padding = new Thickness(5),
+                    Margin = new Thickness(5)
+                };
+
+                var textBlock = new TextBlock
+                {
+                    Text = notification.message,
+                    FontSize = 16,
+                    TextWrapping = TextWrapping.Wrap
+                };
+
+                border.Child = textBlock;
+                NotificationsPanel.Children.Add(border);
+            }
         }
 
-       
+
+
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {

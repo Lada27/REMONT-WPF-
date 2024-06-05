@@ -14,7 +14,7 @@ namespace CURSACH.Classes
         public string homeTechModel;
         public string problemDescryption;
         public string requestStatus;
-        public DateTime completionDate;
+        public DateTime? completionDate;
         public string repairParts;
         public int? masterID; // Может быть null
         public int clientID;

@@ -408,8 +408,15 @@
 
 
                         <Grid Grid.Row="2">
-                            <StackPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.2*"/>
+                                    <RowDefinition/>
+
+                                </Grid.RowDefinitions>
+                                
                                 <TextBlock Text="Уведомления:"
+                                           Grid.Row="0"
                                        TextAlignment="Left"
                                        Foreground="Black"
                                            FontWeight="Bold"
@@ -418,20 +425,13 @@
                                        FontSize="19"
                                       FontFamily="Montserrat"
                                       VerticalAlignment="Center"/>
-                                <DataGrid x:Name="NotificationsDataGrid"
-                                      AutoGenerateColumns="False"
-                                      CanUserAddRows="False"
-                                          Margin="10"
-                                      >
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Сообщение" Binding="{Binding message}" Width="*"/>
-                                        <DataGridTextColumn Header="Дата добавления" Binding="{Binding additionDate}" Width="*"/>
-                                        <DataGridCheckBoxColumn Header="Просмотрено" Binding="{Binding isWatched}" Width="*"/>
-                                        <DataGridTextColumn Header="Номер заявки" Binding="{Binding requestID}" Width="*"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                                <ScrollViewer Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Auto">
+                                    <StackPanel x:Name="NotificationsPanel" >
+                                        
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
 
-                            </StackPanel>
                         </Grid>
 
 
